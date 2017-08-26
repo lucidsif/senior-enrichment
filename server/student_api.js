@@ -1,9 +1,14 @@
 const studentApi = require('express').Router();
-const db = require('../db');
+const Student = require('../db').models.student;
 
 
 studentApi.get('/', (req, res, next) => {
-    res.send('students');
+    console.log(Student);
+    Student.findAll()
+        .then((students) => res.json(students).status(200))
+        .catch(console.err)
 });
+
+
 
 module.exports = studentApi;

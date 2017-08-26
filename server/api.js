@@ -1,6 +1,5 @@
 'use strict';
 const api = require('express').Router();
-const db = require('../db')
 const studentApi = require('./student_api');
 const campusApi = require('./campus_api');
 
