@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import PlanetaryCampus from './PlanetaryCampus';
+import {Link} from 'react-router-dom';
+import CampusThumbnail from './CampusThumbnail';
+// create route and link for each planetary campus
+//import PlanetaryCampus from './PlanetaryCampus';
 
 export default class Home extends Component {
     constructor() {
@@ -8,8 +11,10 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                body
-                <PlanetaryCampus/>
+                Get your galactic degree here!
+                <Link to={`/campus/1`}><CampusThumbnail campus={1}/></Link>
+                <Link to={`/campus/2`}><CampusThumbnail campus={2}/></Link>
+                <Link to={`/campus/3`}><CampusThumbnail campus={3}/></Link>
             </div>
         )
     }
