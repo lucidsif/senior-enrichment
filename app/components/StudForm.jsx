@@ -1,25 +1,31 @@
 import React, {Component} from 'react';
-import {FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
 
 export default class extends Component {
     constructor(){
         super();
         this.state = {
-            value: ''
+            name: '',
+            campus: ''
         };
         this.getValidationState = this.getValidationState.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
     getValidationState() {
-        const length = this.state.value.length;
-        if (length > 10) return 'success';
-        else if (length > 5) return 'warning';
-        else if (length > 0) return 'error';
+        const length = this.state.name.length;
+        if (length > 0) return 'success';
+        else return 'error';
     }
 
-    handleChange(e) {
-        console.log('change', e.target.value, this.state.value);
-        this.setState({ value: e.target.value });
+    handleNameChange(e) {
+        this.setState({ name: e.target.value });
+    }
+
+    handleSelectChange(e) {
+        this.setState({ campus: e.target.value });
+        console.log(this.state.campus);
     }
 
     render() {
@@ -29,16 +35,23 @@ export default class extends Component {
                     controlId="formBasicText"
                     validationState={this.getValidationState()}
                 >
-                    <ControlLabel>Working example with validation</ControlLabel>
+                    <ControlLabel>Type your name</ControlLabel>
                     <FormControl
                         type="text"
                         value={this.state.value}
-                        placeholder="Enter text"
-                        onChange={this.handleChange}
+                        placeholder="Name"
+                        onChange={this.handleNameChange}
                     />
                     <FormControl.Feedback />
-                    <HelpBlock>Validation is based on string length.</HelpBlock>
                 </FormGroup>
+                <FormGroup controlId="formControlsSelect">
+                    <ControlLabel>Select your campus</ControlLabel>
+                    <FormControl componentClass="select" placeholder="select" onChange={this.handleSelectChange}>
+                        <option value="select">select</option>
+                        <option value="other">...</option>
+                    </FormControl>
+                </FormGroup>
+                <Button bsStyle="info">Submit</Button>
             </form>
         )
     }
