@@ -11,7 +11,7 @@ export default function App(props) {
             <DarkNavBar />
             <Route exact path='/' component={Home} />
             <Route exact path='/campus/:id' component={PlanetaryCampus} />
-            <Route exact path='/studs/:id' component={StudsDirectory} />
+            <Route exact path='/studs' component={StudsDirectory} />
         </div>
     )
 }

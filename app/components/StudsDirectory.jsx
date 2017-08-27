@@ -1,4 +1,5 @@
 import React from 'react';
+import StudTable from './StudTable';
 import StudFormModal from './StudFormModal';
 
 // TODO: add a bootstrap table
@@ -6,7 +7,8 @@ import StudFormModal from './StudFormModal';
 export default function StudsDirectory() {
     return (
         <div>
-            studs dir
+            <StudFormModal />
+            <StudTable />
         </div>
     )
 }
