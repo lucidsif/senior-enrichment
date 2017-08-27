@@ -1,5 +1,6 @@
 import React from 'react';
-
+// can get campus info from state
+// can i get campus info from campus thumbnail?
 export default function PlanetaryCampus() {
     return (
         <div>
