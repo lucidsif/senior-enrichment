@@ -8,6 +8,7 @@ import PlanetaryCampus from '../components/PlanetaryCampus'
 import StudsDirectory from '../components/StudsDirectory';
 import StudFormModal from '../components/StudFormModal';
 import StudTable from '../components/StudTable';
+import StudForm from '../components/StudForm';
 
 describe('React components', () => {
 
@@ -61,7 +62,7 @@ describe('React components', () => {
         it('should have 3 columns', () => {
             expect(studTable.find('th')).to.have.length(3);
         })
-    })
+    });
     describe('<StudFormModal />', () => {
         let studFormModal;
         beforeEach('Create component', () => {
@@ -69,7 +70,16 @@ describe('React components', () => {
         });
         it('should be a <div>', () => {
             expect(studFormModal.is('div')).to.be.equal(true);
-        })
+        });
     });
+    describe('<StudForm />', () => {
+        let studForm;
+        beforeEach('Create component', () => {
+            studForm = shallow(<StudForm />)
+        });
+        it('renders a <form>', () => {
+            expect(studForm.contains(<form></form>)).to.equal(true);
+        });
+    })
 
 });
