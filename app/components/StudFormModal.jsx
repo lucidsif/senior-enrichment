@@ -35,7 +35,7 @@ export default class StudFormModal extends Component {
                         <Modal.Title>Add Stud</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        form here
+                        <StudForm />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close}>Close</Button>

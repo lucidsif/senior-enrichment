@@ -77,9 +77,12 @@ describe('React components', () => {
         beforeEach('Create component', () => {
             studForm = shallow(<StudForm />)
         });
-        it('renders a <form>', () => {
-            expect(studForm.contains(<form></form>)).to.equal(true);
+        it('should be a form', () => {
+            expect(studForm.is('form')).to.be.true;
         });
+        // it('renders a <form>', () => {
+        //     expect(studForm.find('form').length).to.equal(1);
+        // });
     })
 
 });
