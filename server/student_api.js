@@ -3,7 +3,7 @@ const Student = require('../db').models.student;
 
 
 studentApi.get('/', (req, res, next) => {
-    Student.findAll()
+    Student.findAll({include: [{all: true}]})
         .then((students) => res.json(students).status(200))
         .catch(console.err)
 });
