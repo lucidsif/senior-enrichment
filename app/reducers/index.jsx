@@ -1,8 +1,6 @@
 //import {combineReducers} from 'redux'
-// create redux thunks
-    // fetch all campuses, fetch all students, fetch one campus, post new student
 
-import {GET_CAMPUSES, GET_CAMPUS} from '../action-creators/actions';
+import {GET_CAMPUSES, GET_CAMPUS, SELECT_CAMPUS, GET_STUDENTS, GET_STUDENT, ADD_STUDENT} from '../action-creators/actions';
 
 const initialState = {
     campuses: [],
@@ -17,6 +15,14 @@ const rootReducer = function (state = initialState, action) {
            return Object.assign({}, state, {campuses: state.campuses.concat(action.campuses)});
         case GET_CAMPUS:
             return Object.assign({}, state, {campuses: state.campuses.concat(action.campus)});
+        case SELECT_CAMPUS:
+            return Object.assign({}, state, {selectedCampus: action.selectedCampus});
+        case GET_STUDENTS:
+            return Object.assign({}, state, {students: state.students.concat(action.students)});
+        case GET_STUDENT:
+            return Object.assign({}, state, {students: state.students.concat(action.student)});
+        case ADD_STUDENT:
+            return Object.assign({}, state, {addedStudent: action.addedStudent});
         default:
             return state
     }
