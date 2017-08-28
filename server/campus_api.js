@@ -2,7 +2,7 @@ const campusApi = require('express').Router();
 const Campus = require('../db').models.campus
 
 campusApi.get('/', (req, res, next) => {
-    Campus.findAll()
+    Campus.findAll({ include: [{all: true}] })
         .then((campuses) => res.json(campuses).status(200))
         .catch(console.err)
 });
