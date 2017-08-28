@@ -1,10 +1,10 @@
-const GET_CAMPUSES = 'GET_CAMPUSES';
-const GET_CAMPUS = 'GET_CAMPUS';
+export const GET_CAMPUSES = 'GET_CAMPUSES';
+export const GET_CAMPUS = 'GET_CAMPUS';
 
-export const getCampuses = (campusesArr) => {
+export const getCampuses = (campuses) => {
     return {
         type: GET_CAMPUSES,
-        campuses: campusesArr
+        campuses
     }
 };
 
@@ -13,4 +13,5 @@ export const getCampus = (campus) => {
         type: GET_CAMPUS,
         campus: campus
     }
-}
+};
+
