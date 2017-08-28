@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Button} from 'react-bootstrap'
 
+// add onclick to span
 export default function StudTable() {
     return (
         <Table striped bordered condensed hover>
