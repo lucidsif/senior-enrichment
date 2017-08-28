@@ -9,26 +9,23 @@ export default function StudTable() {
                 <th>#</th>
                 <th>Name</th>
                 <th>Campus</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>1</td>
+                <td><span className="glyphicon glyphicon-trash" aria-hidden="true"></span><span>1</span></td>
                 <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>Otto </td>
             </tr>
             <tr>
                 <td>2</td>
                 <td>Jacob</td>
                 <td>Thornton</td>
-                <td>@fat</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td colSpan="2">Larry the Bird</td>
-                <td>@twitter</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
             </tr>
             </tbody>
         </Table>

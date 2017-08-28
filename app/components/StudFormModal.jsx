@@ -22,7 +22,7 @@ export default class StudFormModal extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Button
                     bsStyle="primary"
                     bsSize="small"
