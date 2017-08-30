@@ -47,3 +47,5 @@ export const addStudent = (addedStudent) => {
         addedStudent
     }
 }
+
+// TODO: CREATE FETCH/redux thunks!!!!
