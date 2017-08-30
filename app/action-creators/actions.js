@@ -75,5 +75,14 @@ export const fetchStudents = () => (dispatch) => {
 
 // postStudent
 
+export const postStudent = (studentObj) => (dispatch) => {
+    axios.post('/api/students', studentObj)
+        .then((response) => {
+            console.log('after post request*****:', response);
+            dispatch(getStudent(response))
+                .catch(console.error);
+        })
+}
+
 
 
