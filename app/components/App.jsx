@@ -5,10 +5,10 @@ import Home from './Home';
 import DarkNavBar from './Navbar';
 import PlanetaryCampus from './PlanetaryCampus';
 import StudsDirectory from './StudsDirectory';
-import {getCampuses, getStudents} from "../action-creators/actions";
+import {fetchCampuses, fetchStudents} from "../action-creators/actions";
 
 
-// TODO: FIX GETCAMPUSES & GETSTUDENTS BUG
+// TODO: Add reduxthunks to fetch campuses & students
 class App extends Component {
     constructor() {
         super();
@@ -16,9 +16,9 @@ class App extends Component {
 
     componentDidMount() {
         console.log('props inside app.js***', this.props)
-        //const campusesThunk = getCampuses();
+        const campusesThunk = fetchCampuses();
         this.props.dispatchThunk(campusesThunk);
-       // const studentsThunk = getStudents();
+        const studentsThunk = fetchStudents();
         this.props.dispatchThunk(studentsThunk);
     }
 

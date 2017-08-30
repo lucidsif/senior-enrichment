@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const GET_CAMPUSES = 'GET_CAMPUSES';
 export const GET_CAMPUS = 'GET_CAMPUS';
 export const SELECT_CAMPUS = 'SELECT_CAMPUS';
@@ -46,6 +48,30 @@ export const addStudent = (addedStudent) => {
         type: ADD_STUDENT,
         addedStudent
     }
-}
+};
 
 // TODO: CREATE FETCH/redux thunks!!!!
+
+// getCampuses
+
+export const fetchCampuses = () => (dispatch) => {
+    axios.get('/api/campuses').then((campuses) => {
+        dispatch(getCampuses(campuses));
+    })
+        .catch(console.error)
+};
+// fetchStudents
+
+export const fetchStudents = () => (dispatch) => {
+    axios.post('/api/students').then((students) => {
+        dispatch(getStudents(students));
+    })
+        .catch(console.error);
+};
+
+// postCampus
+
+// postStudent
+
+
+
