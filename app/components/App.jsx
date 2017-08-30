@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import Home from './Home';
 import DarkNavBar from './Navbar';
 import PlanetaryCampus from './PlanetaryCampus';
@@ -43,5 +43,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-const EnhancedApp = connect(null, mapDispatchToProps)(App);
+const EnhancedApp = withRouter(connect(null, mapDispatchToProps)(App));
 export default EnhancedApp;

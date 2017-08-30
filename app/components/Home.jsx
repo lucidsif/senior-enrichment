@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import CampusThumbnail from './CampusThumbnail';
 import {connect} from 'react-redux';
 import {Grid, Row} from 'react-bootstrap';
@@ -18,8 +18,8 @@ class Home extends Component {
             <Grid>
                 <Row>
                     {campuses.map((campus) => {
-                        return <CampusThumbnail campus={campus}/>
-                        //<Link to={`/campus/${campus.id}`}><CampusThumbnail campus={campus}/></Link>
+                        //return <CampusThumbnail campus={campus}/>
+                        return <Link key={campus.id} to={`/campus/${campus.id}`}><CampusThumbnail campus={campus}/></Link>
                     })}
                 </Row>
             </Grid>
@@ -34,6 +34,6 @@ function mapStateToProps(state) {
 }
 
 
-const enhancedHome = connect(mapStateToProps, null)(Home);
+const enhancedHome = withRouter(connect(mapStateToProps, null)(Home));
 
 export default enhancedHome;
