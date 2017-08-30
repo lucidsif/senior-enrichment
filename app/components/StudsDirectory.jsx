@@ -1,17 +1,25 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import StudTable from './StudTable';
 import StudFormModal from './StudFormModal';
-import {Container} from 'react-bootstrap';
 
 // TODO: add a bootstrap table
 // TODO: add a formModal
-export default function StudsDirectory() {
+function StudsDirectory(props) {
     return (
         <div className="container">
             <StudFormModal />
             <div className="container">
-            <StudTable />
+            <StudTable students={props.students}/>
             </div>
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        students: state.students
+    }
+}
+
+export default connect(mapStateToProps, null)(StudsDirectory);
