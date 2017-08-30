@@ -55,7 +55,8 @@ export const addStudent = (addedStudent) => {
 // getCampuses
 
 export const fetchCampuses = () => (dispatch) => {
-    axios.get('/api/campuses').then((campuses) => {
+    axios.get('/api/campuses').then(res => res.data).then((campuses) => {
+        //console.log(campuses);
         dispatch(getCampuses(campuses));
     })
         .catch(console.error)
@@ -63,7 +64,8 @@ export const fetchCampuses = () => (dispatch) => {
 // fetchStudents
 
 export const fetchStudents = () => (dispatch) => {
-    axios.post('/api/students').then((students) => {
+    axios.get('/api/students').then(res => res.data).then((students) => {
+        //console.log(students);
         dispatch(getStudents(students));
     })
         .catch(console.error);

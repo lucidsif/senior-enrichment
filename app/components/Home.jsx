@@ -1,23 +1,39 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import CampusThumbnail from './CampusThumbnail';
+import {connect} from 'react-redux';
+import {Grid, Row} from 'react-bootstrap';
 // create route and link for each planetary campus
 import PlanetaryCampus from './PlanetaryCampus';
 
-export default class Home extends Component {
+class Home extends Component {
     constructor() {
         super();
     }
 
     render() {
+        const {campuses} = this.props;
+        console.log('in home**', campuses);
         return (
-            <div>
-                Get your galactic degree here!
-                {/*map campuses from state */}
-                <Link to={`/campus/1`}><CampusThumbnail campus={1}/></Link>
-                <Link to={`/campus/2`}><CampusThumbnail campus={2}/></Link>
-                <Link to={`/campus/3`}><CampusThumbnail campus={3}/></Link>
-            </div>
+            <Grid>
+                <Row>
+                    {campuses.map((campus) => {
+                        return <CampusThumbnail campus={campus}/>
+                        //<Link to={`/campus/${campus.id}`}><CampusThumbnail campus={campus}/></Link>
+                    })}
+                </Row>
+            </Grid>
         )
     }
 };
+
+function mapStateToProps(state) {
+    return {
+        campuses: state.campuses
+    }
+}
+
+
+const enhancedHome = connect(mapStateToProps, null)(Home);
+
+export default enhancedHome;
