@@ -200,5 +200,5 @@ describe('Reducer', () => {
     })
 });
 
-// fetch all campuses, fetch all students, fetch one campus, post new student
+// TODO: Fetch campuses and students on app load
 
