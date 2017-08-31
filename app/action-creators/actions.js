@@ -24,6 +24,17 @@ export const fetchCampuses = () => (dispatch) => {
         .catch(console.error)
 };
 
+export const postCampus = (campusObj) => (dispatch) => {
+    axios.post('/api/campuses', campusObj)
+        .then(response => response.data)
+        .then((campus) => {
+            dispatch(fetchStudents());
+            dispatch(fetchCampuses());
+        })
+        .catch(console.error);
+
+};
+
 export const fetchStudents = () => (dispatch) => {
     axios.get('/api/students')
         .then(res => res.data)

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
 import StudForm from './StudForm';
-import {postStudent} from "../action-creators/actions";
+import CampusForm from './CampusForm';
+import {postStudent, postCampus} from "../action-creators/actions";
 
 class FormModal extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class FormModal extends Component {
         };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
-        this.handlePost = this.handlePost.bind(this);
+        this.handleStudentPost = this.handleStudentPost.bind(this);
+        this.handleCampusPost = this.handleCampusPost.bind(this);
     }
 
     close() {
@@ -23,10 +25,13 @@ class FormModal extends Component {
         this.setState({ showModal: true });
     }
 
-    handlePost(formObj) {
-        // TODO: validate before submit
-        const campusesThunk = postStudent(formObj);
-        this.props.post(campusesThunk);
+    handleStudentPost(formObj) {
+        this.props.post(postStudent(formObj));
+        this.close();
+    }
+
+    handleCampusPost(formObj) {
+        this.props.post(postCampus(formObj));
         this.close();
     }
 
@@ -34,11 +39,12 @@ class FormModal extends Component {
         const {type} = this.props;
         if (type === 'Student') {
             return (
-                <StudForm handlePost={this.handlePost} />
+                <StudForm handleStudentPost={this.handleStudentPost} />
             )
         } else if (type === 'Campus') {
-            return <div>mock form</div>
-            //return <StudForm handlePost={this.handlePost} />
+            return (
+                <CampusForm handleCampusPost={this.handleCampusPost}/>
+            )
         }
     }
 

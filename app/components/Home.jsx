@@ -3,8 +3,9 @@ import {Link, withRouter} from 'react-router-dom';
 import CampusThumbnail from './CampusThumbnail';
 import {connect} from 'react-redux';
 import {Grid, Row} from 'react-bootstrap';
-// create route and link for each planetary campus
+import FormModal from './FormModal';
 
+// create route and link for each planetary campus
 class Home extends Component {
     constructor() {
         super();
@@ -13,6 +14,9 @@ class Home extends Component {
         const {campuses} = this.props;
         return (
             <Grid>
+                <Row>
+                    <FormModal type={"Campus"} />
+                </Row>
                 <Row>
                     {campuses.map((campus) => {
                         //return <CampusThumbnail campus={campus}/>

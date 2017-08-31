@@ -54,7 +54,7 @@ class StudForm extends Component {
         const {email, name, campusId} = this.state;
         console.log(email, name, campusId);
         if (email.length > 0 && name.length > 0 && campusId) {
-            this.props.handlePost(this.state);
+            this.props.handleStudentPost(this.state);
         }
     }
 
