@@ -20,7 +20,7 @@ class Home extends Component {
                 <Row>
                     {campuses.map((campus) => {
                         //return <CampusThumbnail campus={campus}/>
-                        return <Link key={campus.id} to={`/hustlers/${campus.id}`}><CampusThumbnail campus={campus}/></Link>
+                        return <Link key={campus.id} to={`/hustlers/${campus.id}`}><CampusThumbnail dispatchThunk={this.props.dispatchThunk} campus={campus}/></Link>
                     })}
                 </Row>
             </Grid>
@@ -30,10 +30,7 @@ class Home extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        edit: function(thunk) {
-            dispatch(thunk);
-        },
-        delete: function(thunk) {
+        dispatchThunk: function (thunk) {
             dispatch(thunk);
         }
     }
@@ -45,6 +42,6 @@ function mapStateToProps(state) {
     }
 }
 
-const enhancedHome = withRouter(connect(mapStateToProps, mapDispatchToProps())(Home));
+const enhancedHome = withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
 
 export default enhancedHome;
