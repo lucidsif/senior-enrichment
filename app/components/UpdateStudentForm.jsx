@@ -10,12 +10,12 @@ class UpdateStudentForm extends Component {
             name: student.name,
             email: student.email,
             campusId: student.campusId,
-            campus: student.campus.name
         };
         this.getNameValidationState = this.getNameValidationState.bind(this);
         this.getEmailValidationState = this.getEmailValidationState.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -37,6 +37,10 @@ class UpdateStudentForm extends Component {
 
     handleEmailChange(e) {
         this.setState({ email: e.target.value });
+    }
+
+    handleSelectChange(e) {
+        this.setState({ campusId: e.target.value });
     }
 
     handleSubmit(e) {
@@ -76,6 +80,17 @@ class UpdateStudentForm extends Component {
                     />
                     <FormControl.Feedback />
                 </FormGroup>
+                <FormGroup controlId="formControlsSelect"
+                >
+                    <ControlLabel>Select your campus</ControlLabel>
+                    <FormControl componentClass="select" placeholder="select" onChange={this.handleSelectChange}>
+                        {
+                            this.props.campuses.map((campus) => {
+                                return <option key={campus.id} value={campus.id}>{campus.name}</option>
+                            })
+                        }
+                    </FormControl>
+                </FormGroup>
                 <Button className="form-modal-submit" onClick={this.handleSubmit} bsStyle="info">Update</Button>
             </form>
         )
@@ -84,7 +99,8 @@ class UpdateStudentForm extends Component {
 
 function mapStateToProps(state) {
     return {
-        students: state.students
+        students: state.students,
+        campuses: state.campuses
     }
 }
 
