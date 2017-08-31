@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
 import StudForm from './StudForm';
+import {postStudent} from "../action-creators/actions";
 
-export default class StudFormModal extends Component {
-    constructor() {
-        super();
+class StudFormModal extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
             showModal: false,
         };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
+        this.handlePost = this.handlePost.bind(this);
     }
 
     close() {
@@ -18,6 +21,13 @@ export default class StudFormModal extends Component {
 
     open() {
         this.setState({ showModal: true });
+    }
+
+    handlePost(formObj) {
+        // TODO: validate before submit
+        const campusesThunk = postStudent(formObj);
+        this.props.post(campusesThunk);
+        this.close();
     }
 
     // TODO: Create onSubmit func here, close modal after submission, and pass to studform
@@ -37,7 +47,7 @@ export default class StudFormModal extends Component {
                         <Modal.Title>Add Stud</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <StudForm />
+                        <StudForm handlePost={this.handlePost} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.close}>Close</Button>
@@ -47,3 +57,14 @@ export default class StudFormModal extends Component {
         );
     }
 };
+
+function mapDispatchToProps(dispatch) {
+    return {
+        post: function(postThunk) {
+            dispatch(postThunk)
+        }
+    }
+}
+
+const EnhancedStudFormModal = connect(null, mapDispatchToProps)(StudFormModal);
+export default EnhancedStudFormModal;

@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
-import {postStudent} from "../action-creators/actions";
 
 class StudForm extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             name: '',
             email: '',
-            campusId: ''
+            campusId: this.props.campuses[0].id
         };
         this.getValidationState = this.getValidationState.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -38,8 +37,7 @@ class StudForm extends Component {
 
     handleSubmit(e) {
         // TODO: validate before submit
-        const campusesThunk = postStudent(this.state);
-        this.props.post(campusesThunk);
+        this.props.handlePost(this.state);
     }
 
     render() {
@@ -93,14 +91,6 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-     return {
-         post: function(postThunk) {
-             dispatch(postThunk)
-         }
-     }
-}
-
-const EnhancedStudForm = connect(mapStateToProps, mapDispatchToProps)(StudForm);
+const EnhancedStudForm = connect(mapStateToProps, null)(StudForm);
 
 export default EnhancedStudForm;
