@@ -19,8 +19,11 @@ export default function DarkNavbar() {
                     <LinkContainer to="/">
                         <NavItem eventKey={1} href="/">Home</NavItem>
                     </LinkContainer>
-                    <LinkContainer to="/studs">
-                        <NavItem eventKey={2} href="studs">Suckers</NavItem>
+                    <LinkContainer to="/hustlers">
+                        <NavItem eventKey={2} href="/hustlers">Hustlers</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/suckers">
+                        <NavItem eventKey={3} href="/suckers">Suckers</NavItem>
                     </LinkContainer>
                 </Nav>
             </Navbar.Collapse>
