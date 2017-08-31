@@ -17,7 +17,10 @@ studentApi.get('/:id', (req, res, next) => {
 
 studentApi.post('/', (req, res, next) => {
     Student.create(req.body)
-        .then((student) => res.json(student).status(201))
+        .then((student) => {
+            return Student.find({where: {id: student.id}, include: [{all: true}]});
+        })
+        .then((foundStudent) => res.json(foundStudent).status(201))
         .catch((err) => {
             res.json(err).status(400)
         })

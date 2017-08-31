@@ -9,7 +9,7 @@ class StudForm extends Component {
         this.state = {
             name: '',
             email: '',
-            campus: ''
+            campusId: ''
         };
         this.getValidationState = this.getValidationState.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -33,18 +33,18 @@ class StudForm extends Component {
     }
 
     handleSelectChange(e) {
-        this.setState({ campus: e.target.value });
-        console.log(this.state.campus);
+        this.setState({ campusId: e.target.value });
     }
 
     handleSubmit(e) {
+        // TODO: validate before submit
         const campusesThunk = postStudent(this.state);
         this.props.post(campusesThunk);
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form>
                 <FormGroup
                     controlId="formBasicText"
                     validationState={this.getValidationState()}
@@ -81,7 +81,7 @@ class StudForm extends Component {
                         }
                     </FormControl>
                 </FormGroup>
-                <Button bsStyle="info">Submit</Button>
+                <Button onClick={this.handleSubmit} bsStyle="info">Submit</Button>
             </form>
         )
     }

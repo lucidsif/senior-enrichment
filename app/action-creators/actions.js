@@ -64,10 +64,12 @@ export const fetchCampuses = () => (dispatch) => {
 // fetchStudents
 
 export const fetchStudents = () => (dispatch) => {
-    axios.get('/api/students').then(res => res.data).then((students) => {
-        //console.log(students);
-        dispatch(getStudents(students));
-    })
+    axios.get('/api/students')
+        .then(res => res.data)
+        .then((students) => {
+            //console.log(students);
+            dispatch(getStudents(students));
+        })
         .catch(console.error);
 };
 
@@ -77,11 +79,13 @@ export const fetchStudents = () => (dispatch) => {
 
 export const postStudent = (studentObj) => (dispatch) => {
     axios.post('/api/students', studentObj)
-        .then((response) => {
-            console.log('after post request*****:', response);
-            dispatch(getStudent(response))
-                .catch(console.error);
+        .then(response => response.data)
+        .then((student) => {
+            console.log('after post request*****:', student);
+            dispatch(getStudent(student))
         })
+        .catch(console.error);
+
 }
 
 
