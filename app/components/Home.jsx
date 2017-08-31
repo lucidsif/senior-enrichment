@@ -30,7 +30,6 @@ function mapStateToProps(state) {
     }
 }
 
-
 const enhancedHome = withRouter(connect(mapStateToProps, null)(Home));
 
 export default enhancedHome;
