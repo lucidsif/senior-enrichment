@@ -1,0 +1,89 @@
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Button, Modal} from 'react-bootstrap';
+import StudForm from './StudForm';
+import CampusForm from './CampusForm';
+import {putCampus} from "../action-creators/actions";
+
+class UpdateFormModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false,
+        };
+        this.close = this.close.bind(this);
+        this.open = this.open.bind(this);
+       //this.handleStudentUpdate = this.handleStudentUpdate.bind(this);
+        this.handleCampusUpdate = this.handleCampusUpdate.bind(this);
+    }
+
+    close() {
+        this.setState({ showModal: false });
+    }
+
+    open() {
+        this.setState({ showModal: true });
+    }
+    //
+    // handleStudentUpdate(formObj) {
+    //     this.props.update(putStudent(formObj));
+    //     this.close();
+    // }
+
+    handleCampusUpdate(formObj) {
+        this.props.update(putCampus(formObj));
+        this.close();
+    }
+
+    renderTypeForm() {
+        console.log('INSIDE UPDATEFORMMODAL', this.props)
+        const {type} = this.props;
+        if (type === 'Student') {
+            return (
+                <StudForm handleStudentUpdate={this.handleStudentUpdate} />
+            )
+        } else if (type === 'Campus') {
+            return (
+                <CampusForm handleCampusUpdate={this.handleCampusUpdate}/>
+            )
+        }
+    }
+
+    // TODO: Create onSubmit func here, close modal after submission, and pass to studform
+    render() {
+        return (
+            <div className="container">
+                <Button
+                    bsStyle="primary"
+                    bsSize="small"
+                    onClick={this.open}
+                    className="float-right-margin"
+                >
+                    Update {this.props.type}
+                </Button>
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Update {this.props.type}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {this.renderTypeForm()}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.close}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        );
+    }
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        update: function(updateThunk) {
+            dispatch(updateThunk)
+        }
+    }
+}
+
+const EnhancedUpdateFormModal = connect(null, mapDispatchToProps)(UpdateFormModal);
+export default EnhancedUpdateFormModal;

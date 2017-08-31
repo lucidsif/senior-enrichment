@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Jumbotron, ListGroup, ListGroupItem} from 'react-bootstrap';
+import UpdateFormModal from './UpdateFormModal';
 // can get campus info from state
 // can i get campus info from campus thumbnail?
 export function PlanetaryCampus(props) {
@@ -12,6 +13,7 @@ export function PlanetaryCampus(props) {
             <Jumbotron>
                 <h1>Students of {campus.name}</h1>
             </Jumbotron>
+            <UpdateFormModal type={"Campus"} />
             <ListGroup>
                 {
                     campus.students.map((student) => {

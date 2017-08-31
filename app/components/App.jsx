@@ -15,7 +15,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-        console.log('props inside app.js***', this.props)
         const campusesThunk = fetchCampuses();
         this.props.dispatchThunk(campusesThunk);
         const studentsThunk = fetchStudents();

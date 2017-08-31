@@ -7,11 +7,10 @@ import FormModal from './FormModal';
 
 // create route and link for each planetary campus
 class Home extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     render() {
-        console.log('inside campus directory***:', this.props);
         const {campuses} = this.props;
         return (
             <Grid>

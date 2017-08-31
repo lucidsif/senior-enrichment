@@ -80,6 +80,17 @@ export const postStudent = (studentObj) => (dispatch) => {
 
 };
 
+export const putStudent = (studentId, studentObj) => (dispatch) => {
+    axios.put(`/api/campuses${studentId}`, studentObj)
+        .then(response => response.data)
+        .then((student) => {
+            dispatch(fetchStudents());
+            dispatch(fetchCampuses());
+        })
+        .catch(console.error);
+
+};
+
 export const deleteStudent = (studentId) => (dispatch) => {
     axios.delete(`/api/students/${studentId}`)
         .then((response) => response.data)
