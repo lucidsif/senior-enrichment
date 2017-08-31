@@ -1,6 +1,6 @@
 //import {combineReducers} from 'redux'
 
-import {GET_CAMPUSES, GET_CAMPUS, SELECT_CAMPUS, GET_STUDENTS, GET_STUDENT, ADD_STUDENT} from '../action-creators/actions';
+import {GET_CAMPUSES, GET_CAMPUS, SELECT_CAMPUS, GET_STUDENTS, GET_STUDENT, ADD_STUDENT, REMOVE_STUDENT} from '../action-creators/actions';
 
 const initialState = {
     campuses: [],
@@ -23,6 +23,10 @@ const rootReducer = function (state = initialState, action) {
             return Object.assign({}, state, {students: state.students.concat(action.student)});
         case ADD_STUDENT:
             return Object.assign({}, state, {addedStudent: action.addedStudent});
+        case REMOVE_STUDENT:
+            const newStudentsArr = state.students.filter((student) => student.id !== action.deletedStudentId);
+            // TODO: should also update campuses?
+            return Object.assign({}, state, {students: newStudentsArr });
         default:
             return state
     }

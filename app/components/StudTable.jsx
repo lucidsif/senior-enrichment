@@ -1,9 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Table, Button} from 'react-bootstrap'
+import {deleteStudent} from "../action-creators/actions";
 
 // add onclick to span
-export default function StudTable(props) {
+function StudTable(props) {
     const students = props.students;
+
+    function handleDelete(id) {
+        const deleteThunk = deleteStudent(id);
+        props.delete(deleteThunk);
+    }
     return (
         <Table striped bordered condensed hover>
             <thead>
@@ -17,7 +24,7 @@ export default function StudTable(props) {
             {
                 students.map((student) => {
                    return <tr key={student.id}>
-                        <td><span className="glyphicon glyphicon-trash" aria-hidden="true"></span><span>{student.id}</span></td>
+                        <td><span onClick={() => handleDelete(student.id)}className="glyphicon glyphicon-trash red-formatted" aria-hidden="true"></span><span>{student.id}</span></td>
                         <td>{student.name}</td>
                         <td>{student.campus.name} </td>
                     </tr>
@@ -27,3 +34,14 @@ export default function StudTable(props) {
         </Table>
     )
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        delete: function(thunk) {
+            dispatch(thunk);
+        }
+    }
+}
+
+const EnhancedStudTable = connect(null, mapDispatchToProps)(StudTable);
+export default EnhancedStudTable;

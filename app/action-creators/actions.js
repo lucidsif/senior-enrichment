@@ -7,6 +7,7 @@ export const SELECT_CAMPUS = 'SELECT_CAMPUS';
 export const GET_STUDENTS = 'GET_STUDENTS';
 export const GET_STUDENT = 'GET_STUDENT';
 export const ADD_STUDENT = 'ADD_STUDENT';
+export const REMOVE_STUDENT = 'REMOVE_STUDENT';
 
 export const getCampuses = (campuses) => {
     return {
@@ -50,13 +51,19 @@ export const addStudent = (addedStudent) => {
     }
 };
 
+export const removeStudent = (deletedStudentId) => {
+    return {
+        type: REMOVE_STUDENT,
+        deletedStudentId
+    }
+}
+
 // TODO: CREATE FETCH/redux thunks!!!!
 
 // getCampuses
 
 export const fetchCampuses = () => (dispatch) => {
     axios.get('/api/campuses').then(res => res.data).then((campuses) => {
-        //console.log(campuses);
         dispatch(getCampuses(campuses));
     })
         .catch(console.error)
@@ -67,7 +74,6 @@ export const fetchStudents = () => (dispatch) => {
     axios.get('/api/students')
         .then(res => res.data)
         .then((students) => {
-            //console.log(students);
             dispatch(getStudents(students));
         })
         .catch(console.error);
@@ -81,11 +87,22 @@ export const postStudent = (studentObj) => (dispatch) => {
     axios.post('/api/students', studentObj)
         .then(response => response.data)
         .then((student) => {
-            console.log('after post request*****:', student);
             dispatch(getStudent(student))
         })
         .catch(console.error);
 
+};
+
+// deleteStudent
+
+export const deleteStudent = (studentId) => (dispatch) => {
+    axios.delete(`/api/students/${studentId}`)
+        .then((response) => response.data)
+        .then(() => {
+            // more efficient way than this?
+            dispatch(removeStudent(studentId));
+        })
+        .catch(console.error)
 }
 
 

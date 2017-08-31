@@ -27,8 +27,9 @@ export default class StudFormModal extends Component {
                     bsStyle="primary"
                     bsSize="small"
                     onClick={this.open}
+                    className="float-right-margin"
                 >
-                    Add Stud
+                    Add Sucker
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>

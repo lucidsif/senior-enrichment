@@ -1,0 +1,10 @@
+.float-right-margin {
+    float: right;
+    margin-bottom: 1em;
+}
+
+.red-formatted {
+    color: red;
+    margin-right: 5px;
+
+}
