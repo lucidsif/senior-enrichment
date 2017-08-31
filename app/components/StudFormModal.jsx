@@ -20,6 +20,7 @@ export default class StudFormModal extends Component {
         this.setState({ showModal: true });
     }
 
+    // TODO: Create onSubmit func here, close modal after submission, and pass to studform
     render() {
         return (
             <div className="container">
