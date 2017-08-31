@@ -28,12 +28,23 @@ class Home extends Component {
     }
 };
 
+function mapDispatchToProps(dispatch) {
+    return {
+        edit: function(thunk) {
+            dispatch(thunk);
+        },
+        delete: function(thunk) {
+            dispatch(thunk);
+        }
+    }
+}
+
 function mapStateToProps(state) {
     return {
         campuses: state.campuses
     }
 }
 
-const enhancedHome = withRouter(connect(mapStateToProps, null)(Home));
+const enhancedHome = withRouter(connect(mapStateToProps, mapDispatchToProps())(Home));
 
 export default enhancedHome;
