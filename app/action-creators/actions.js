@@ -34,6 +34,18 @@ export const postCampus = (campusObj) => (dispatch) => {
         .catch(console.error);
 
 };
+
+export const putCampus = (campusId, campusObj) => (dispatch) => {
+    axios.put(`/api/campuses${campusId}`, campusObj)
+        .then(response => response.data)
+        .then((campus) => {
+            dispatch(fetchStudents());
+            dispatch(fetchCampuses());
+        })
+        .catch(console.error);
+
+};
+
 // on delete, cascade - test backend
 export const deleteCampus= (campusId) => (dispatch) => {
     axios.delete(`/api/campuses/${campusId}`)

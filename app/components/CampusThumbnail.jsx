@@ -19,7 +19,6 @@ export default function CampusThumbnail(props) {
             <Thumbnail src={campus.image} alt="242x200">
                 <h3>{campus.name}</h3>
                 <p>
-                    <Button className="btn-margin" bsStyle="warning">Warning</Button>
                     <Button onClick={handleClick} className="btn-margin" bsStyle="danger">Delete</Button>
                     <Button onClick={handleRoute}>Visit</Button>
                 </p>

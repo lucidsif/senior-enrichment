@@ -62,7 +62,7 @@ class FormModal extends Component {
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Sucker</Modal.Title>
+                        <Modal.Title>Add {this.props.type}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {this.renderTypeForm()}

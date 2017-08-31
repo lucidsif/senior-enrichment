@@ -21,7 +21,7 @@ class Home extends Component {
                 <Row>
                     {campuses.map((campus) => {
                         //return <CampusThumbnail campus={campus}/>
-                        return <CampusThumbnail dispatchThunk={this.props.dispatchThunk} campus={campus} history={this.props.history}/>
+                        return <CampusThumbnail key={campus.id} dispatchThunk={this.props.dispatchThunk} campus={campus} history={this.props.history}/>
                     })}
                 </Row>
             </Grid>
