@@ -2,18 +2,20 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
 
-class UpdateCampusForm extends Component {
+class UpdateStudentForm extends Component {
     constructor(props){
         super(props);
-        const campus = this.props.campuses.filter((campus) => campus.id === props.campusId)[0];
+        const student = this.props.students.filter((student) => student.id === props.studentId)[0];
         this.state = {
-            name: campus.name,
-            image: campus.image,
+            name: student.name,
+            email: student.email,
+            campusId: student.campusId,
+            campus: student.campus.name
         };
         this.getNameValidationState = this.getNameValidationState.bind(this);
         this.getEmailValidationState = this.getEmailValidationState.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleImageChange = this.handleImageChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -24,8 +26,8 @@ class UpdateCampusForm extends Component {
     }
 
     getEmailValidationState() {
-        const imageLength = this.state.image.length;
-        if (imageLength > 0) return 'success';
+        const emailLength = this.state.email.length;
+        if (emailLength > 0) return 'success';
         else return 'error';
     }
 
@@ -33,15 +35,15 @@ class UpdateCampusForm extends Component {
         this.setState({ name: e.target.value });
     }
 
-    handleImageChange(e) {
-        this.setState({ image: e.target.value });
+    handleEmailChange(e) {
+        this.setState({ email: e.target.value });
     }
 
     handleSubmit(e) {
         // TODO: validate before submit
-        const {image, name } = this.state;
-        if (image.length > 0 && name.length > 0) {
-            this.props.handleCampusUpdate(this.state);
+        const {email, name } = this.state;
+        if (email.length > 0 && name.length > 0) {
+            this.props.handleStudentUpdate(this.state);
         }
     }
 
@@ -52,7 +54,7 @@ class UpdateCampusForm extends Component {
                     controlId="formBasicText"
                     validationState={this.getNameValidationState()}
                 >
-                    <ControlLabel>Type campus name</ControlLabel>
+                    <ControlLabel>Type student name</ControlLabel>
                     <FormControl
                         type="text"
                         value={this.state.name}
@@ -65,12 +67,12 @@ class UpdateCampusForm extends Component {
                     controlId="formBasicText"
                     validationState={this.getEmailValidationState()}
                 >
-                    <ControlLabel>Type your image</ControlLabel>
+                    <ControlLabel>Type your email</ControlLabel>
                     <FormControl
                         type="text"
-                        value={this.state.image}
+                        value={this.state.email}
                         placeholder="ImageUrl"
-                        onChange={this.handleImageChange}
+                        onChange={this.handleEmailChange}
                     />
                     <FormControl.Feedback />
                 </FormGroup>
@@ -82,10 +84,10 @@ class UpdateCampusForm extends Component {
 
 function mapStateToProps(state) {
     return {
-        campuses: state.campuses
+        students: state.students
     }
 }
 
-const EnhancedUpdateCampusForm = connect(mapStateToProps, null)(UpdateCampusForm);
+const EnhancedUpdateStudentForm = connect(mapStateToProps, null)(UpdateStudentForm);
 
-export default EnhancedUpdateCampusForm;
+export default EnhancedUpdateStudentForm;

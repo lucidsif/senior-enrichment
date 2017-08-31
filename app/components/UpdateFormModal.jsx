@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
-import StudForm from './StudForm';
 import UpdateCampusForm from './UpdateCampusForm';
-import {putCampus} from "../action-creators/actions";
+import UpdateStudentForm from './UpdateStudentForm';
+import {putCampus, putStudent} from "../action-creators/actions";
 
 class UpdateFormModal extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class UpdateFormModal extends Component {
         };
         this.close = this.close.bind(this);
         this.open = this.open.bind(this);
-       //this.handleStudentUpdate = this.handleStudentUpdate.bind(this);
+       this.handleStudentUpdate = this.handleStudentUpdate.bind(this);
         this.handleCampusUpdate = this.handleCampusUpdate.bind(this);
     }
 
@@ -25,10 +25,10 @@ class UpdateFormModal extends Component {
         this.setState({ showModal: true });
     }
     //
-    // handleStudentUpdate(formObj) {
-    //     this.props.update(putStudent(formObj));
-    //     this.close();
-    // }
+    handleStudentUpdate(formObj) {
+        this.props.update(putStudent(this.props.studentId, formObj));
+        this.close();
+    }
 
     handleCampusUpdate(formObj) {
         this.props.update(putCampus(this.props.campusId, formObj));
@@ -39,7 +39,7 @@ class UpdateFormModal extends Component {
         const {type} = this.props;
         if (type === 'Student') {
             return (
-                <StudForm handleStudentUpdate={this.handleStudentUpdate} />
+                <UpdateStudentForm handleStudentUpdate={this.handleStudentUpdate} studentId={this.props.studentId}/>
             )
         } else if (type === 'Campus') {
             return (

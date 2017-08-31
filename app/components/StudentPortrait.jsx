@@ -7,10 +7,13 @@ import UpdateFormModal from './UpdateFormModal';
 export function StudentPortrait(props) {
     const id = +props.match.params.id;
     const student = props.students.filter((student) => student.id === id)[0];
+    // console.log('inside ')
     let counter = 0;
-    console.log('inside studportrait', student);
     return (
         <Grid>
+            <Row>
+                <UpdateFormModal type={"Student"} studentId={student.id} />
+            </Row>
             <Row>
                 <Col xs={12} md={12} lg={12}>
                     <h3>{student.name}</h3>

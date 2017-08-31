@@ -81,7 +81,7 @@ export const postStudent = (studentObj) => (dispatch) => {
 };
 
 export const putStudent = (studentId, studentObj) => (dispatch) => {
-    axios.put(`/api/campuses/${studentId}`, studentObj)
+    axios.put(`/api/students/${studentId}`, studentObj)
         .then(response => response.data)
         .then((student) => {
             dispatch(fetchStudents());
