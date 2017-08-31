@@ -20,7 +20,7 @@ export default function DarkNavbar() {
                         <NavItem eventKey={1} href="/">Home</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/studs">
-                        <NavItem eventKey={2} href="studs">Studs</NavItem>
+                        <NavItem eventKey={2} href="studs">Suckers</NavItem>
                     </LinkContainer>
                 </Nav>
             </Navbar.Collapse>

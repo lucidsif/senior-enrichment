@@ -98,7 +98,7 @@ class StudForm extends Component {
                         }
                     </FormControl>
                 </FormGroup>
-                <Button onClick={this.handleSubmit} bsStyle="info">Submit</Button>
+                <Button className="form-modal-submit" onClick={this.handleSubmit} bsStyle="info">Submit</Button>
             </form>
         )
     }

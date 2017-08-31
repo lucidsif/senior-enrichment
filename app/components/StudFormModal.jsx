@@ -44,7 +44,7 @@ class StudFormModal extends Component {
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Stud</Modal.Title>
+                        <Modal.Title>Add Sucker</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <StudForm handlePost={this.handlePost} />
