@@ -5,6 +5,7 @@ import DarkNavBar from './Navbar';
 import Home from './Home';
 import CampusDirectory from './CampusDirectory';
 import CampusPortrait from './CampusPortrait';
+import StudentPortrait from './StudentPortrait';
 import StudsDirectory from './StudsDirectory';
 import {fetchCampuses, fetchStudents} from "../action-creators/actions";
 
@@ -29,7 +30,7 @@ class App extends Component {
                 <Route exact path='/hustlers' component={CampusDirectory}/>
                 <Route exact path='/hustlers/:id' component={CampusPortrait}/>
                 <Route exact path='/suckers' component={StudsDirectory}/>
-                <Route exact path='/suckers/:id' component={StudsDirectory}/>
+                <Route exact path='/suckers/:id' component={StudentPortrait}/>
             </div>
         )
     }

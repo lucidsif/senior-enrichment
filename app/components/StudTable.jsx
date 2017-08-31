@@ -12,6 +12,11 @@ function StudTable(props) {
         props.delete(deleteThunk);
     }
 
+    function handleRoute(id) {
+        console.log(id);
+        props.history.push(`/suckers/${id}`);
+    }
+
     let index = 0;
     return (
         <Table striped bordered condensed hover>
@@ -27,7 +32,7 @@ function StudTable(props) {
                 students.map((student) => {
                    return <tr key={student.id}>
                         <td><span onClick={() => handleDelete(student.id)}className="glyphicon glyphicon-trash red-formatted" aria-hidden="true"></span><span>{++index}</span></td>
-                        <td>{student.name}</td>
+                        <td onClick={() => handleRoute(student.id)}>{student.name}</td>
                         <td>{student.campus.name} </td>
                     </tr>
                 })
