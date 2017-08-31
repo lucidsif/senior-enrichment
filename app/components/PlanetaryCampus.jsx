@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Jumbotron, ListGroup, ListGroupItem} from 'react-bootstrap';
 // can get campus info from state
 // can i get campus info from campus thumbnail?
-function PlanetaryCampus(props) {
+export function PlanetaryCampus(props) {
     const id = +props.match.params.id;
     const campus = props.campuses.filter((campus) => campus.id === id)[0];
     let counter = 0;

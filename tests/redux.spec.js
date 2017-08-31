@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {createStore} from 'redux';
-import rootReducer from '../reducers';
-import {GET_CAMPUSES, GET_STUDENTS} from '../action-creators/actions';
-import {getCampuses, getStudents} from "../action-creators/actions";
+import rootReducer from '../app/reducers';
+import {GET_CAMPUSES, GET_STUDENTS} from '../app/action-creators/actions';
+import {getCampuses, getStudents} from "../app/action-creators/actions";
 
 const testCampusesArr = [{
     id: 2,

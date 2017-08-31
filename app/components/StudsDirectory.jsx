@@ -5,7 +5,7 @@ import StudFormModal from './StudFormModal';
 
 // TODO: add a bootstrap table
 // TODO: add a formModal
-function StudsDirectory(props) {
+export function StudsDirectory(props) {
     return (
         <div className="container">
             <StudFormModal />

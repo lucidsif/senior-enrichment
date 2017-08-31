@@ -4,7 +4,7 @@
   "description": "A review time project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./app/tests/*.spec.js --watch --compilers js:babel-register",
+    "test": "mocha ./tests/*.spec.js --watch --compilers js:babel-register",
     "build": "webpack",
     "build-watch": "webpack -w",
     "start": "nodemon server/start.js"
