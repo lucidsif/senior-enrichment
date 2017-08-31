@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import {Col, Button, Thumbnail} from 'react-bootstrap';
 import {deleteCampus} from "../action-creators/actions";
 
@@ -8,6 +9,11 @@ export default function CampusThumbnail(props) {
     function handleClick() {
         dispatchThunk(deleteCampus(campus.id));
     }
+
+    function handleRoute() {
+        console.log(props);
+        props.history.push(`/hustlers/${campus.id}`)
+    }
     return (
         <Col xs={6} md={6} lg={6}>
             <Thumbnail src={campus.image} alt="242x200">
@@ -15,6 +21,7 @@ export default function CampusThumbnail(props) {
                 <p>
                     <Button className="btn-margin" bsStyle="warning">Warning</Button>
                     <Button onClick={handleClick} className="btn-margin" bsStyle="danger">Delete</Button>
+                    <Button onClick={handleRoute}>Visit</Button>
                 </p>
             </Thumbnail>
         </Col>

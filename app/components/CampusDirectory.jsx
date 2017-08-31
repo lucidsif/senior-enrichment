@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import CampusThumbnail from './CampusThumbnail';
 import {connect} from 'react-redux';
 import {Grid, Row} from 'react-bootstrap';
@@ -11,6 +11,7 @@ class Home extends Component {
         super();
     }
     render() {
+        console.log('inside campus directory***:', this.props);
         const {campuses} = this.props;
         return (
             <Grid>
@@ -20,7 +21,7 @@ class Home extends Component {
                 <Row>
                     {campuses.map((campus) => {
                         //return <CampusThumbnail campus={campus}/>
-                        return <Link key={campus.id} to={`/hustlers/${campus.id}`}><CampusThumbnail dispatchThunk={this.props.dispatchThunk} campus={campus}/></Link>
+                        return <CampusThumbnail dispatchThunk={this.props.dispatchThunk} campus={campus} history={this.props.history}/>
                     })}
                 </Row>
             </Grid>
