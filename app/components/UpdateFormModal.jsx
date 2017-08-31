@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
 import StudForm from './StudForm';
-import CampusForm from './CampusForm';
+import UpdateCampusForm from './UpdateCampusForm';
 import {putCampus} from "../action-creators/actions";
 
 class UpdateFormModal extends Component {
@@ -31,12 +31,11 @@ class UpdateFormModal extends Component {
     // }
 
     handleCampusUpdate(formObj) {
-        this.props.update(putCampus(formObj));
+        this.props.update(putCampus(this.props.campusId, formObj));
         this.close();
     }
 
     renderTypeForm() {
-        console.log('INSIDE UPDATEFORMMODAL', this.props)
         const {type} = this.props;
         if (type === 'Student') {
             return (
@@ -44,7 +43,7 @@ class UpdateFormModal extends Component {
             )
         } else if (type === 'Campus') {
             return (
-                <CampusForm handleCampusUpdate={this.handleCampusUpdate}/>
+                <UpdateCampusForm handleCampusUpdate={this.handleCampusUpdate} campusId={this.props.campusId}/>
             )
         }
     }
@@ -54,7 +53,7 @@ class UpdateFormModal extends Component {
         return (
             <div className="container">
                 <Button
-                    bsStyle="primary"
+                    bsStyle="warning"
                     bsSize="small"
                     onClick={this.open}
                     className="float-right-margin"

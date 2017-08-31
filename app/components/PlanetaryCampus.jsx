@@ -13,7 +13,7 @@ export function PlanetaryCampus(props) {
             <Jumbotron>
                 <h1>Students of {campus.name}</h1>
             </Jumbotron>
-            <UpdateFormModal type={"Campus"} />
+            <UpdateFormModal type={"Campus"} campusId={campus.id} />
             <ListGroup>
                 {
                     campus.students.map((student) => {
