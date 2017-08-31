@@ -4,7 +4,7 @@ import {Route, withRouter} from 'react-router-dom';
 import DarkNavBar from './Navbar';
 import Home from './Home';
 import CampusDirectory from './CampusDirectory';
-import PlanetaryCampus from './PlanetaryCampus';
+import CampusPortrait from './CampusPortrait';
 import StudsDirectory from './StudsDirectory';
 import {fetchCampuses, fetchStudents} from "../action-creators/actions";
 
@@ -27,8 +27,9 @@ class App extends Component {
                 <DarkNavBar/>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/hustlers' component={CampusDirectory}/>
-                <Route exact path='/hustlers/:id' component={PlanetaryCampus}/>
+                <Route exact path='/hustlers/:id' component={CampusPortrait}/>
                 <Route exact path='/suckers' component={StudsDirectory}/>
+                <Route exact path='/suckers/:id' component={StudsDirectory}/>
             </div>
         )
     }
