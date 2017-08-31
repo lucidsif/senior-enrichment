@@ -44,6 +44,7 @@
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "sinon": "^3.2.1",
+    "supertest": "^3.0.0",
     "volleyball": "^1.4.1",
     "webpack": "^1.13.3"
   }
