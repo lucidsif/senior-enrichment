@@ -10,16 +10,30 @@ class StudForm extends Component {
             email: '',
             campusId: this.props.campuses[0].id
         };
-        this.getValidationState = this.getValidationState.bind(this);
+        this.getNameValidationState = this.getNameValidationState.bind(this);
+        this.getEmailValidationState = this.getEmailValidationState.bind(this);
+        this.getInputValidationState = this.getInputValidationState.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    getValidationState() {
-        const length = this.state.name.length;
-        if (length > 0) return 'success';
+    getNameValidationState() {
+        const nameLength = this.state.name.length;
+        if (nameLength > 0) return 'success';
+        else return 'error';
+    }
+
+    getEmailValidationState() {
+        const emailLength = this.state.email.length;
+        if (emailLength > 0) return 'success';
+        else return 'error';
+    }
+
+    getInputValidationState() {
+        const campusId = this.state.campusId;
+        if (typeof campusId !== 'number') return 'success';
         else return 'error';
     }
 
@@ -37,7 +51,11 @@ class StudForm extends Component {
 
     handleSubmit(e) {
         // TODO: validate before submit
-        this.props.handlePost(this.state);
+        const {email, name, campusId} = this.state;
+        console.log(email, name, campusId);
+        if (email.length > 0 && name.length > 0 && campusId) {
+            this.props.handlePost(this.state);
+        }
     }
 
     render() {
@@ -45,7 +63,7 @@ class StudForm extends Component {
             <form>
                 <FormGroup
                     controlId="formBasicText"
-                    validationState={this.getValidationState()}
+                    validationState={this.getNameValidationState()}
                 >
                     <ControlLabel>Type your name</ControlLabel>
                     <FormControl
@@ -58,7 +76,7 @@ class StudForm extends Component {
                 </FormGroup>
                 <FormGroup
                     controlId="formBasicText"
-                    validationState={this.getValidationState()}
+                    validationState={this.getEmailValidationState()}
                 >
                     <ControlLabel>Type your email</ControlLabel>
                     <FormControl
@@ -69,7 +87,8 @@ class StudForm extends Component {
                     />
                     <FormControl.Feedback />
                 </FormGroup>
-                <FormGroup controlId="formControlsSelect">
+                <FormGroup controlId="formControlsSelect"
+                >
                     <ControlLabel>Select your campus</ControlLabel>
                     <FormControl componentClass="select" placeholder="select" onChange={this.handleSelectChange}>
                         {

@@ -8,7 +8,6 @@ import StudsDirectory from './StudsDirectory';
 import {fetchCampuses, fetchStudents} from "../action-creators/actions";
 
 
-// TODO: Add reduxthunks to fetch campuses & students
 class App extends Component {
     constructor() {
         super();
