@@ -8,11 +8,11 @@ export default function(props){
         <div className="fs-split">
 
             <div className="split-image-left">
-                <Button bsStyle="success" className="campus-btn">See Campuses</Button>
+                <Link to="/hustlers"><Button bsStyle="success" className="campus-btn">See Campuses</Button></Link>
             </div>
 
             <div className="split-image-right">
-                <Button bsStyle="info" className="campus-btn">See Students</Button>
+                <Link to="/suckers"><Button bsStyle="info" className="campus-btn">See Students</Button></Link>
             </div>
 
 

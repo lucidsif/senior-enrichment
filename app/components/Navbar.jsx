@@ -10,7 +10,7 @@ export default function DarkNavbar() {
                     {/*<LinkContainer to="/">*/}
                         {/*<NavItem eventKey={1} href="/">Home</NavItem>*/}
                     {/*</LinkContainer>*/}
-                    <a href="/">Directory of Galactic Degree Mills</a>
+                    <a href="/">Directory of Degree Mills</a>
                 </Navbar.Brand>
                 <Navbar.Toggle/>
             </Navbar.Header>
