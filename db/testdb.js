@@ -13,13 +13,25 @@ const db = module.exports = new Sequelize(connectionString, {
 });
 
 const Student = db.define('student', {
-    name: Sequelize.STRING,
-    email: Sequelize.STRING
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
 });
 
 const Campus = db.define('campus', {
-    name: Sequelize.STRING,
-    image: Sequelize.STRING
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    image: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
 });
 
 Student.belongsTo(Campus);

@@ -77,8 +77,27 @@ export const postStudent = (studentObj) => (dispatch) => {
             dispatch(fetchCampuses());
         })
         .catch(console.error);
-
 };
+
+
+
+// export function postStudent(studentObj) {
+//     return function thunk(dispatch) {
+//         axios.post('/api/students', studentObj)
+//             .then(response => response.data)
+//             .then((student) => {
+//                 //dispatch(getStudent(student))
+//                 dispatch(fetchStudents());
+//                 dispatch(fetchCampuses());
+//             })
+//             .catch(console.error);
+//     }
+// }
+
+
+
+
+
 
 export const putStudent = (studentId, studentObj) => (dispatch) => {
     axios.put(`/api/students/${studentId}`, studentObj)
