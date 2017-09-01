@@ -12,3 +12,14 @@
 .btn-margin{
     margin-right: 0.5em;
 }
+
+.campus-btn {
+    height:20px;
+    width:100px;
+    margin: -20px -50px;
+    position:relative;
+    top:50%;
+    left:50%;
+    height: 3em;
+    width: 10em;
+}

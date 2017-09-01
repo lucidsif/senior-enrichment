@@ -4,9 +4,8 @@ import {shallow, mount} from 'enzyme';
 import {spy} from 'sinon';
 import Home from '../app/components/Home';
 import CampusThumbnail from '../app/components/CampusThumbnail';
-import {PlanetaryCampus} from '../app/components/PlanetaryCampus'
 import {StudsDirectory} from '../app/components/StudsDirectory';
-import StudFormModal from '../app/components/StudFormModal';
+import FormModal from '../app/components/FormModal';
 import StudTable from '../app/components/StudTable';
 import StudForm from '../app/components/StudForm';
 import {Grid} from 'react-bootstrap';
@@ -28,7 +27,7 @@ describe('React components', () => {
         //     expect(home.find(CampusThumbnail)).to.have.length.above(0);
         // })
     });
-    describe('<PlanetaryCampus />', () => {
+    describe('<CampusThumbnail />', () => {
         let campus;
         let props;
         beforeEach('Create component', () => {
@@ -39,7 +38,7 @@ describe('React components', () => {
                     }
                 }
             };
-            campus = shallow(<PlanetaryCampus props={props} />);
+            campus = shallow(<CampusThumbnail props={props} />);
             console.log(campus);
         });
         // it('should be a <div>', () => {
@@ -63,8 +62,8 @@ describe('React components', () => {
     //     it('uses <StudTable />', () => {
     //         expect(studsDirectory.find(StudTable).length).to.equal(1);
     //     })
-    //     it('uses <StudFormModal />', () => {
-    //         expect(studsDirectory.find(StudFormModal).length).to.equal(1);
+    //     it('uses <FormModal />', () => {
+    //         expect(studsDirectory.find(FormModal).length).to.equal(1);
     //     })
     // });
     // describe('<StudTable />', () => {
@@ -76,10 +75,10 @@ describe('React components', () => {
     //         expect(studTable.find('th')).to.have.length(3);
     //     })
     // });
-    // describe('<StudFormModal />', () => {
+    // describe('<FormModal />', () => {
     //     let studFormModal;
     //     beforeEach('Create component', () => {
-    //         studFormModal = shallow(<StudFormModal />)
+    //         studFormModal = shallow(<FormModal />)
     //     });
     //     it('should be a <div>', () => {
     //         expect(studFormModal.is('div')).to.be.equal(true);

@@ -125,10 +125,20 @@ body.page-template-page-fullsingle-split p {
         height: auto;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap; } }
-.fs-split .split-image {
+.fs-split .split-image-left {
+    margin-top: -2.75em;
     width: 50%;
     height: 100vh;
-    background-image: url("https://i.imgflip.com/7nte5.jpg?a417744");
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://i.imgflip.com/7nte5.jpg?a417744");
+    /*background-image: url("https://i.imgflip.com/7nte5.jpg?a417744");*/
+    background-position: center center;
+    background-size: cover; }
+.fs-split .split-image-right {
+    margin-top: -2.75em;
+    width: 50%;
+    height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("http://www.debtfreeadventure.com/wp-content/uploads/2012/05/student-loan-debt.jpg");
+    /*background-image: url("http://www.debtfreeadventure.com/wp-content/uploads/2012/05/student-loan-debt.jpg");*/
     background-position: center center;
     background-size: cover; }
 @media (max-width: 800px) {
