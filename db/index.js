@@ -28,8 +28,8 @@ function sync(force=false, retries=0, maxRetries=5) {
     if (process.env.NODE_ENV === 'production' || retries > maxRetries) {
       console.error(chalk.red(`********** database error ***********`))
       console.error(chalk.red(`    Couldn't connect to ${connectionString}`))
-      console.error()
-      console.error(chalk.red(fail))
+      console.error();
+      console.error(chalk.red(fail));
       console.error(chalk.red(`*************************************`))
       return
     }

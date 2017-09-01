@@ -6,7 +6,8 @@ const request = require('supertest');
 const app = require('../server/start');
 const agent = request.agent(app);
 
-const db = require('../db/testdb');
+// create new db in test db
+const db = require('../db');
 const Campus = db.models.campus;
 const Student = db.models.student;
 
