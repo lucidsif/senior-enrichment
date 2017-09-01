@@ -10,7 +10,7 @@ export function StudsDirectory(props) {
         <div className="container">
             <FormModal type={"Student"}/>
             <div className="container">
-            <StudTable students={props.students} history={props.history} />
+            <StudTable students={props.students} />
             </div>
         </div>
     )

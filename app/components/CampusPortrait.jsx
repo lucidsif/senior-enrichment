@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Jumbotron, ListGroup, ListGroupItem} from 'react-bootstrap';
 import UpdateFormModal from './UpdateFormModal';
-// can get campus info from state
-// can i get campus info from campus thumbnail?
+import FormModal from './FormModal';
+
 export function PlanetaryCampus(props) {
     const id = +props.match.params.id;
     const campus = props.campuses.filter((campus) => campus.id === id)[0];
@@ -14,11 +15,12 @@ export function PlanetaryCampus(props) {
                 <h1>Students of {campus.name}</h1>
             </Jumbotron>
             <UpdateFormModal type={"Campus"} campusId={campus.id} />
+            <FormModal type={"StudentAtCampus"} campusId={campus.id}/>
             <ListGroup>
                 {
                     campus.students.map((student) => {
                         counter++;
-                        return <ListGroupItem key={student.id}>{counter} - {student.name}</ListGroupItem>
+                        return <ListGroupItem key={student.id}>{counter} - <Link to={`/suckers/${student.id}`}>{student.name}</Link></ListGroupItem>
 
                     })
                 }

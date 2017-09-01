@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Grid, Col, Row, Thumbnail, Button} from 'react-bootstrap';
 import UpdateFormModal from './UpdateFormModal';
@@ -23,7 +24,7 @@ export function StudentPortrait(props) {
                             Email: {student.email}
                         </p>
                         <p>
-                            Campus: {student.campus.name}
+                            Campus: <Link to={`/hustlers/${student.campus.id}`}>{student.campus.name}</Link>
                         </p>
                             <p>
                                 {/*<Button onClick={handleClick} className="btn-margin" bsStyle="danger">Delete</Button>*/}

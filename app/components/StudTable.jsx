@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Table, Button} from 'react-bootstrap'
 import {deleteStudent} from "../action-creators/actions";
@@ -10,11 +11,6 @@ function StudTable(props) {
     function handleDelete(id) {
         const deleteThunk = deleteStudent(id);
         props.delete(deleteThunk);
-    }
-
-    function handleRoute(id) {
-        console.log(id);
-        props.history.push(`/suckers/${id}`);
     }
 
     let index = 0;
@@ -32,8 +28,8 @@ function StudTable(props) {
                 students.map((student) => {
                    return <tr key={student.id}>
                         <td><span onClick={() => handleDelete(student.id)}className="glyphicon glyphicon-trash red-formatted" aria-hidden="true"></span><span>{++index}</span></td>
-                        <td onClick={() => handleRoute(student.id)}>{student.name}</td>
-                        <td>{student.campus.name} </td>
+                       <td><Link to={`/suckers/${student.id}`}>{student.name}</Link></td>
+                       <td><Link to={`/hustlers/${student.campus.id}`}>{student.campus.name}</Link> </td>
                     </tr>
                 })
             }

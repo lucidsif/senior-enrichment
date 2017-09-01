@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
 import StudForm from './StudForm';
+import StudFormAtCampus from './StudFormAtCampus';
 import CampusForm from './CampusForm';
 import {postStudent, postCampus} from "../action-creators/actions";
 
@@ -18,11 +19,11 @@ class FormModal extends Component {
     }
 
     close() {
-        this.setState({ showModal: false });
+        this.setState({showModal: false});
     }
 
     open() {
-        this.setState({ showModal: true });
+        this.setState({showModal: true});
     }
 
     handleStudentPost(formObj) {
@@ -39,7 +40,11 @@ class FormModal extends Component {
         const {type} = this.props;
         if (type === 'Student') {
             return (
-                <StudForm handleStudentPost={this.handleStudentPost} />
+                <StudForm handleStudentPost={this.handleStudentPost}/>
+            )
+        } else if (type === 'StudentAtCampus') {
+            return (
+                <StudFormAtCampus handleStudentPost={this.handleStudentPost} campusId={this.props.campusId}/>
             )
         } else if (type === 'Campus') {
             return (
@@ -58,7 +63,7 @@ class FormModal extends Component {
                     onClick={this.open}
                     className="float-right-margin"
                 >
-                    Add {this.props.type}
+                    Add {this.props.type === 'StudentAtCampus' ? 'Student': this.props.type}
                 </Button>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
@@ -78,7 +83,7 @@ class FormModal extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        post: function(postThunk) {
+        post: function (postThunk) {
             dispatch(postThunk)
         }
     }
