@@ -4,21 +4,28 @@ const chalk = require('chalk');
 const Sequelize = require('sequelize');
 const pkg = require('../package.json');
 
-const name = process.env.DATABASE_NAME;
-const connectionString = process.env.DATABASE_connectionString || `postgres://localhost:5432/${name}`;
+const name = process.argv[process.argv.length - 1];
+console.log('name***', name);
+const connectionString = `postgres://localhost:5432/${name}`;
 
 console.log(chalk.yellow(`Opening database connection to ${connectionString}`));
 
 // create the database instance that can be used in other database files
 const db = module.exports = new Sequelize(connectionString, {
-  logging: debug, // export DEBUG=sql in the environment to get SQL queries 
-  native: true    // lets Sequelize know we can use pg-native for ~30% more speed (if you have issues with pg-native feel free to take this out and work it back in later when we have time to help)
+    logging: debug, // export DEBUG=sql in the environment to get SQL queries
+    native: true    // lets Sequelize know we can use pg-native for ~30% more speed (if you have issues with pg-native feel free to take this out and work it back in later when we have time to help)
 });
 
 // run our models file (makes all associations for our Sequelize objects)
-require('./models')
+require('./models');
 
-// sync the db, creating it if necessary
+
+// db.sync()
+//     .then((response) => {
+//         console.log(`db: ${name} was synced`);
+//     })
+//     .catch(console.error)
+// This causes errors:
 function sync(force=false, retries=0, maxRetries=5) {
   return db.sync({force})
   .then(ok => console.log(`Synced models to db ${connectionString}`))
@@ -40,5 +47,7 @@ function sync(force=false, retries=0, maxRetries=5) {
     ).then(() => sync(true, retries + 1))
   })
 }
-
-db.didSync = sync();
+// if we are not running tests, sync the db;
+if (!name.includes('test')) {
+    sync();
+}
