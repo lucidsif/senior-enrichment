@@ -1,7 +1,6 @@
 'use strict';
 const expect = require('chai').expect;
 const request = require('supertest');
-// use express app that uses testdb
 const app = require('../server/start');
 const agent = request.agent(app);
 const db = require('../db');
@@ -26,16 +25,29 @@ describe('Campuses Route:', () => {
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .expect((res) => {
-                expect(res.body).to.be.an.instanceOf(Array);
-                expect(res.body).to.have.length(0);
+                    expect(res.body).to.be.an.instanceOf(Array);
+                    expect(res.body).to.have.length(0);
                 })
         });
     });
 
-    // describe('attributes definition', () => {
-    //     it('includes `name` and `image` fields', function() {
-    //
-    //     })
-    // })
+    it('returns a campus if there is one in the DB', () => {
+        var campusName = 'Hunter College';
+        var campusImage = 'http://www.hunter.cuny.edu/artsci/pressroom/slideshow-home/hunter-college-exterior/image';
+        var campus = Campus.build({
+            name: campusName,
+            image: campusImage
+        });
+
+        return campus.save().then(() => {
+                return agent
+                    .get('/api/campuses')
+                    .expect(200)
+                    .expect((res) => {
+                        expect(res.body).to.be.an.instanceOf(Array);
+                        expect(res.body[0].name).to.equal(campusName);
+                    })
+            })
+    })
 
 });

@@ -2,10 +2,8 @@
 const debug = require('debug')('sql');
 const chalk = require('chalk');
 const Sequelize = require('sequelize');
-const pkg = require('../package.json');
 
 const name = process.argv[process.argv.length - 1];
-console.log('name***', name);
 const connectionString = `postgres://localhost:5432/${name}`;
 
 console.log(chalk.yellow(`Opening database connection to ${connectionString}`));
@@ -19,13 +17,6 @@ const db = module.exports = new Sequelize(connectionString, {
 // run our models file (makes all associations for our Sequelize objects)
 require('./models');
 
-
-// db.sync()
-//     .then((response) => {
-//         console.log(`db: ${name} was synced`);
-//     })
-//     .catch(console.error)
-// This causes errors:
 function sync(force=false, retries=0, maxRetries=5) {
   return db.sync({force})
   .then(ok => console.log(`Synced models to db ${connectionString}`))
