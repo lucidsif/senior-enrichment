@@ -1,5 +1,6 @@
 const campusApi = require('express').Router();
-const Campus = require('../db').models.campus
+// should connect to production or test depending on
+const Campus = require('../db').models.campus;
 
 campusApi.get('/', (req, res, next) => {
     Campus.findAll({ include: [{all: true}] })

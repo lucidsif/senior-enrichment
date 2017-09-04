@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
-const {db, Campus, Student} = require('../db/testdb');
+const db = require('../db');
+const {Campus, Student} = require('../db/models');
 
 describe('The Student model', () => {
     before(() => {

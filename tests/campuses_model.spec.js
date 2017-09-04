@@ -1,7 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-const {db, Campus} = require('../db/testdb');
+const db = require('../db');
+const {Campus} = require('../db/models');
 
 describe('The `Campus` model', function () {
 
