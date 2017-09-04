@@ -1,48 +1,74 @@
 'use strict';
 
 const expect = require('chai').expect;
+const {db, Campus, Student} = require('../db/testdb');
 
-const app = require('../server/start');
+describe('The `Campus` model', function () {
 
-// create new db in test db
-const db = require('../db/testdb');
-const Campus = db.models.campus;
-const Student = db.models.student;
-
-
-describe('The Campus model', () => {
-    before(() => {
-        return db.sync({force: true})
+    /**
+     * First we clear the database and recreate the tables before beginning a run
+     */
+    before(function () {
+        return db.sync({force: true});
     });
 
-    var campusName = 'Hunter College';
-    var imageUrl = 'https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.hunter.cuny.edu%2Fartsci%2Fpressroom%2Fslideshow-home%2Fhunter-college-exterior%2Fimage&imgrefurl=http%3A%2F%2Fwww.hunter.cuny.edu%2Fartsci&docid=FFRz6MZA-1lbpM&tbnid=hQ9g223Wtds82M%3A&vet=10ahUKEwiZ1OLfpoTWAhWh7YMKHfkACoIQMwiHASgDMAM..i&w=1024&h=683&bih=703&biw=1280&q=hunter%20college&ved=0ahUKEwiZ1OLfpoTWAhWh7YMKHfkACoIQMwiHASgDMAM&iact=mrc&uact=8'
+    /**
+     * Next, we create an (un-saved!) article instance before every spec
+     */
+    var campusName = 'Campus1';
+    var campusImage = 'http://campusimage.com/app.png';
 
     var campus;
-    beforeEach(() => {
+    beforeEach(function(){
         campus = Campus.build({
             name: campusName,
-            image: imageUrl
-        })
+            image: campusImage
+        });
     });
 
-    // afterEach(() => {
-    //     return Promise.all([
-    //         Student.truncate(),
-    //         Campus.truncate()
-    //     ])
-    // });
+    /**
+     * Also, we empty the tables after each spec
+     */
+    afterEach(function () {
+        return Promise.all([
+            //   Article.truncate({ cascade: true }),
+            Campus.truncate({ cascade: true })
+        ]);
+    });
 
-    describe('attributes definiton', () => {
+    describe('attributes definition', function(){
 
-        it('includes name and image fields', () => {
+        it('includes `name` and `image` fields', function () {
+
             return campus.save()
-                .then((campus) => {
-                    expect(campus.name).to.equal(campusName);
+                .then(function (savedCampus) {
+                    expect(savedCampus.name).to.equal(campusName);
+                    expect(savedCampus.image).to.equal(campusImage);
+                });
+
+        });
+
+        it('requires `name`', function () {
+
+            campus.name = null;
+            return campus.validate()
+                .then(function () {
+                    throw new Error('validation should fail when name is null');
                 })
-                .catch(console.error);
-        })
+                .catch(err => {
+                    expect(err).to.be.an.instanceOf(Error);
+                })
+        });
+        it('requires `image`', function () {
+
+            campus.image = null;
+            return campus.validate()
+                .then(function () {
+                    throw new Error('validation should fail when image is null');
+                })
+                .catch(err => {
+                    expect(err).to.be.an.instanceOf(Error);
+                })
+        });
     })
-
-
-});
+})
