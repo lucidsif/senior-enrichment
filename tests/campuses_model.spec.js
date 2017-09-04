@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const {db, Campus, Student} = require('../db/testdb');
+const {db, Campus} = require('../db/testdb');
 
 describe('The `Campus` model', function () {
 
@@ -31,7 +31,6 @@ describe('The `Campus` model', function () {
      */
     afterEach(function () {
         return Promise.all([
-            //   Article.truncate({ cascade: true }),
             Campus.truncate({ cascade: true })
         ]);
     });
@@ -72,4 +71,5 @@ describe('The `Campus` model', function () {
         });
     })
 });
+
 

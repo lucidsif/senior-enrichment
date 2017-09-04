@@ -43,6 +43,7 @@ module.exports = {
     Campus
 };
 
+// Causes errors
 // function sync(force=false, retries=0, maxRetries=5) {
 //     return db.sync({force})
 //         .then(ok => console.log(`Synced models to db ${connectionString}`))
