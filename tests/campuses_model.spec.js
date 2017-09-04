@@ -15,8 +15,8 @@ describe('The `Campus` model', function () {
     /**
      * Next, we create an (un-saved!) article instance before every spec
      */
-    var campusName = 'Campus1';
-    var campusImage = 'http://campusimage.com/app.png';
+    var campusName = 'Hunter';
+    var campusImage = 'http://www.hunter.cuny.edu/artsci/pressroom/slideshow-home/hunter-college-exterior/image';
 
     var campus;
     beforeEach(function(){
@@ -71,4 +71,5 @@ describe('The `Campus` model', function () {
                 })
         });
     })
-})
+});
+
