@@ -127,4 +127,61 @@ describe('Campuses Route:', () => {
         })
     });
 
+    describe('POST /campuses', () => {
+        var campusName = 'Hunter College';
+        var campusImage = 'http://www.hunter.cuny.edu/artsci/pressroom/slideshow-home/hunter-college-exterior/image';
+        var campus = Campus.build({
+            name: campusName,
+            image: campusImage
+        });
+        var postedCampus;
+
+        it('posts a new campus to the database', () => {
+            return agent
+                .post('/api/campuses')
+                .send(campus)
+                .expect(201)
+                .expect((res) => {
+                    postedCampus = res.body;
+                    expect(res.body.id).to.not.be.an('undefined');
+                    expect(res.body).to.be.an.instanceOf(Object);
+                    expect(res.body.name).to.equal(campusName);
+
+                })
+                .then(() => Campus.findById(postedCampus.id))
+                .then((foundCampus) => {
+                    expect(foundCampus.id).to.equal(postedCampus.id);
+                    expect(foundCampus.name).to.equal(postedCampus.name);
+                })
+        })
+    })
+
+    describe('Delete /campuses', () => {
+        var campusName = 'Hunter College';
+        var campusImage = 'http://www.hunter.cuny.edu/artsci/pressroom/slideshow-home/hunter-college-exterior/image';
+        var campus = Campus.build({
+            name: campusName,
+            image: campusImage
+        });
+        var createdCampus;
+
+        beforeEach(() => {
+            return campus.save().then((campus) => {
+                createdCampus = campus;
+                return createdCampus;
+            })
+        });
+
+        it('should delete the campus with the right id', () => {
+            return agent
+                .delete(`/api/campuses/${createdCampus.id}`)
+                .expect(202)
+                .then(() => Campus.findAll())
+                .then((foundCampuses) => {
+                    expect(foundCampuses.length).to.equal(0);
+                })
+        })
+
+    })
+
 });

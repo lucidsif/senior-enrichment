@@ -29,7 +29,7 @@ campusApi.get('/:id', (req, res, next) => {
 
 campusApi.post('/', (req, res, next) => {
     Campus.create(req.body)
-        .then((campus) => res.json(campus).status(201))
+        .then((campus) => res.status(201).json(campus))
         .catch((err) => {
             res.json(err).status(400)
         })
@@ -55,7 +55,7 @@ campusApi.delete('/:id', (req, res, next) => {
             id
         }
     })
-        .then((campus) => res.json(campus).status(202))
+        .then((campus) => res.sendStatus(202))
         .catch((err) => {
             res.json(err).status(err.status(404))
         })
