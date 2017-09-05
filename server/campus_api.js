@@ -50,7 +50,7 @@ campusApi.put('/:id', (req, res, next) => {
             res.status(200).json(foundCampus)
         })
         .catch((err) => {
-            res.json(err).status(err).status(400)
+            res.status(500).json(err)
         })
 });
 

@@ -171,7 +171,7 @@ describe('Campuses Route:', () => {
             })
         });
 
-        it('updates an existing campus', () => {
+        it('updates a campus', () => {
             return agent.put(`/api/campuses/${theCampus.id}`)
                 .send({name: newCampusName})
                 .expect(200)
@@ -181,6 +181,23 @@ describe('Campuses Route:', () => {
                     expect(res.body).to.exist;
                     expect(res.body.name).to.equal(newCampusName);
                 })
+        });
+
+        it('saves the updated campus to the DB', () => {
+            return agent.put(`/api/campuses/${theCampus.id}`)
+                .send({name: newCampusName})
+                .expect(200)
+                .then(() => Campus.findById(theCampus.id))
+                .then((foundCampus) => {
+                    expect(foundCampus.id).to.equal(theCampus.id);
+                    expect(foundCampus.name).to.equal(newCampusName);
+                })
+        });
+
+        it('gets 500 error for invalid update', () => {
+            return agent.put(`/api/campuses/${theCampus.id}`)
+                .send({name: ''})
+                .expect(500)
         })
 
     });
