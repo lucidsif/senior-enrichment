@@ -136,7 +136,7 @@ describe('Campuses Route:', () => {
         });
         var postedCampus;
 
-        it('posts a new campus to the database', () => {
+        it('creates a new campus', () => {
             return agent
                 .post('/api/campuses')
                 .send(campus)
@@ -146,14 +146,47 @@ describe('Campuses Route:', () => {
                     expect(res.body.id).to.not.be.an('undefined');
                     expect(res.body).to.be.an.instanceOf(Object);
                     expect(res.body.name).to.equal(campusName);
+                })
+        });
 
+        it('saves the campus to the DB', () => {
+            return agent
+                .post('/api/campuses')
+                .send(campus)
+                .expect(201)
+                .expect((res) => {
+                    postedCampus = res.body
                 })
                 .then(() => Campus.findById(postedCampus.id))
                 .then((foundCampus) => {
                     expect(foundCampus.id).to.equal(postedCampus.id);
                     expect(foundCampus.name).to.equal(postedCampus.name);
                 })
+        });
+
+        it('sends back JSON of the actual created campus, not just the POSTed data', () => {
+            return agent.post('/api/campuses')
+                .send({
+                    name: campusName,
+                    image: campusImage,
+                    extraneous: 'This should be quietly ignored by Sequelize'
+                })
+                .expect(201)
+                .expect((res) => {
+                    expect(res.body.extraneous).to.be.an('undefined');
+                    expect(res.body.createdAt).to.exist;
+                })
         })
+
+        it('does not create a new campus without an imageUrl', () => {
+            return agent.post('/api/campuses')
+                .send({
+                    name: campusName,
+                })
+                .expect(500);
+        })
+
+
     });
 
     describe('PUT /campuses/:id', () => {

@@ -24,14 +24,16 @@ campusApi.get('/:id', (req, res, next) => {
 
             }
         })
-        .catch(console.err)
+        .catch((err) => {
+            res.status(500).json(err);
+        })
 });
 
 campusApi.post('/', (req, res, next) => {
     Campus.create(req.body)
         .then((campus) => res.status(201).json(campus))
         .catch((err) => {
-            res.json(err).status(400)
+            res.status(500).json(err);
         })
 });
 
@@ -61,14 +63,14 @@ campusApi.delete('/:id', (req, res, next) => {
         }
     })
         .then((campus) => {
-        if(!campus) {
-            res.sendStatus(404);
-        } else {
-            res.sendStatus(202)
-        }
-    })
+            if (!campus) {
+                res.sendStatus(404);
+            } else {
+                res.sendStatus(202)
+            }
+        })
         .catch((err) => {
-            res.json(err).status(err.status(404))
+            res.status.json(err);
         })
 })
 
