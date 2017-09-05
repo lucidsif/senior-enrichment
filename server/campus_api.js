@@ -46,7 +46,6 @@ campusApi.put('/:id', (req, res, next) => {
             return Campus.findById(id);
         })
         .then((foundCampus) => {
-            console.log('after finding campus***', foundCampus)
             res.status(200).json(foundCampus)
         })
         .catch((err) => {
@@ -61,7 +60,13 @@ campusApi.delete('/:id', (req, res, next) => {
             id
         }
     })
-        .then((campus) => res.sendStatus(202))
+        .then((campus) => {
+        if(!campus) {
+            res.sendStatus(404);
+        } else {
+            res.sendStatus(202)
+        }
+    })
         .catch((err) => {
             res.json(err).status(err.status(404))
         })

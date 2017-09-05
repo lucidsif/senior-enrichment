@@ -225,7 +225,14 @@ describe('Campuses Route:', () => {
                 .then(() => Campus.findAll())
                 .then((foundCampuses) => {
                     expect(foundCampuses.length).to.equal(0);
+                    expect(foundCampuses.filter((campus => campus.id === createdCampus.id)).length).to.equal(0)
                 })
+        });
+
+        it('should return a 404 error if the id is not correct', () => {
+            return agent
+                .delete(`/api/campuses/95892`)
+                .expect(404)
         })
 
     })
