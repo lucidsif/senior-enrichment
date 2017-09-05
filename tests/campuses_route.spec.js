@@ -173,12 +173,14 @@ describe('Campuses Route:', () => {
 
         it('updates an existing campus', () => {
             return agent.put(`/api/campuses/${theCampus.id}`)
-                .send(newCampusName)
-                .expect(204)
-                // .expect((res) => {
-                //     expect(res.body).to.exist;
-                //     expect(res.body.name).to.equal(newCampusName);
-                // })
+                .send({name: newCampusName})
+                .expect(200)
+                .expect((res) => {
+                    console.log(res.body);
+                    expect(res.body.id).to.equal(theCampus.id)
+                    expect(res.body).to.exist;
+                    expect(res.body.name).to.equal(newCampusName);
+                })
         })
 
     });

@@ -42,7 +42,13 @@ campusApi.put('/:id', (req, res, next) => {
             id
         }
     })
-        .then((campus) => res.status(204).json(campus))
+        .then(() => {
+            return Campus.findById(id);
+        })
+        .then((foundCampus) => {
+            console.log('after finding campus***', foundCampus)
+            res.status(200).json(foundCampus)
+        })
         .catch((err) => {
             res.json(err).status(err).status(400)
         })
