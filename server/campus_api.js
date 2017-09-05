@@ -42,7 +42,7 @@ campusApi.put('/:id', (req, res, next) => {
             id
         }
     })
-        .then((campus) => res.json(campus).status(204))
+        .then((campus) => res.status(204).json(campus))
         .catch((err) => {
             res.json(err).status(err).status(400)
         })

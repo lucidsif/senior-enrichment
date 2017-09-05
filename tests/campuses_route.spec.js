@@ -154,7 +154,34 @@ describe('Campuses Route:', () => {
                     expect(foundCampus.name).to.equal(postedCampus.name);
                 })
         })
-    })
+    });
+
+    describe('PUT /campuses/:id', () => {
+        var oldCampusName = 'Hunter College';
+        var newCampusName = 'Baruch College';
+        var campusImage = 'http://www.hunter.cuny.edu/artsci/pressroom/slideshow-home/hunter-college-exterior/image';
+        var theCampus;
+
+        beforeEach(() => {
+            return Campus.create({
+                name: oldCampusName,
+                image: campusImage
+            }).then((campus) => {
+                theCampus = campus;
+            })
+        });
+
+        it('updates an existing campus', () => {
+            return agent.put(`/api/campuses/${theCampus.id}`)
+                .send(newCampusName)
+                .expect(204)
+                // .expect((res) => {
+                //     expect(res.body).to.exist;
+                //     expect(res.body.name).to.equal(newCampusName);
+                // })
+        })
+
+    });
 
     describe('Delete /campuses', () => {
         var campusName = 'Hunter College';
