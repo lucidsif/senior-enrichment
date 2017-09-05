@@ -19,6 +19,7 @@ describe('Campuses Route:', () => {
     });
 
     describe('GET /campuses', () => {
+
         it('responds with an array via JSON', () => {
             return agent
                 .get('/api/campuses')
