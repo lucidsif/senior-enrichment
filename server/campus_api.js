@@ -3,15 +3,27 @@ const campusApi = require('express').Router();
 const Campus = require('../db').models.campus;
 
 campusApi.get('/', (req, res, next) => {
-    Campus.findAll({ include: [{all: true}] })
+    Campus.findAll({include: [{all: true}]})
         .then((campuses) => res.json(campuses).status(200))
         .catch(console.err)
 });
 
 campusApi.get('/:id', (req, res, next) => {
     const id = +req.params.id;
-    Campus.findById(id)
-        .then((campus) => res.json(campus).status(200))
+    Campus.find({
+        where: {
+            id
+        },
+        include: [{all: true}]
+    })
+        .then((campus) => {
+            if (!campus) {
+                res.sendStatus(404);
+            } else {
+                res.json(campus).status(200)
+
+            }
+        })
         .catch(console.err)
 });
 
