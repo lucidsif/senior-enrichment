@@ -184,6 +184,50 @@ describe('Students Route', () => {
                 .send({name: studentName, email: studentEmail, campusId: 999})
                 .expect(500);
         })
+    });
+
+    describe('PUT /students/:id', () => {
+        var theStudent;
+        beforeEach(() => {
+            return Student.create({
+                name: studentName,
+                email: studentEmail,
+                campusId: theCampus.id
+            }).then((student) => theStudent = student);
+        });
+
+        it('updates an existing student', () => {
+            return agent
+                .put(`/api/students/${theStudent.id}`)
+                .send({email: 'changedEmail@email.com'})
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body.id).to.equal(theStudent.id);
+                    expect(res.body.name).to.equal(studentName);
+                    expect(res.body.email).to.equal('changedEmail@email.com');
+                })
+        });
+
+        it('saves updates to the DB', () => {
+            return agent
+                .put(`/api/students/${theStudent.id}`)
+                .send({email: 'changedEmail@email.com'})
+                .expect(200)
+                .then(() => Student.findById(theStudent.id))
+                .then((foundStudent) => {
+                    expect(foundStudent.id).to.equal(theStudent.id);
+                    expect(foundStudent.name).to.equal(theStudent.name);
+                    expect(foundStudent.email).to.equal('changedEmail@email.com');
+                })
+        });
+
+        it('returns 500 error for invalid update', () => {
+            return agent
+                .put(`/api/students/${theStudent.id}`)
+                .send({name: ''})
+                .expect(500);
+        })
+
     })
 
 });

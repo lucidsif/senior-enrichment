@@ -39,9 +39,16 @@ studentApi.put('/:id', (req, res, next) => {
             id
         }
     })
-        .then((student) => res.json(student).status(204))
+        .then((student) => {
+            if (student) {
+                return Student.findById(id);
+            } else {
+                res.sendStatus(404)
+            }
+        })
+        .then((foundStudent) => res.status(200).json(foundStudent))
         .catch((err) => {
-            res.json(err).status(err).status(400)
+            res.status(500).json(err);
         })
 });
 
