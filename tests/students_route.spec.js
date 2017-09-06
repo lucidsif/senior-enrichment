@@ -230,4 +230,34 @@ describe('Students Route', () => {
 
     })
 
+    describe('DELETE /students/:id', () => {
+        var theStudent;
+        beforeEach(() => {
+            var creatingStudents = [
+                {name: `${studentName}1`, email: `${studentEmail}1`},
+                {name: `${studentName}2`, email: `${studentEmail}2`},
+            ]
+                .map((studentData) => Student.create(studentData));
+            return Promise.all(creatingStudents)
+                .then((students) => theStudent = students[1])
+        });
+
+        it('removes the student from the DB', () => {
+            return agent
+                .delete(`/api/students/${theStudent.id}`)
+                .expect(200)
+                .then(() => Student.findAll())
+                .then((allStudents) => {
+                    expect(allStudents).to.have.length(1);
+                })
+        });
+
+        it('returns a 404 error if the ID is not correct', () => {
+            return agent
+                .delete(`/api/students/9999`)
+                .expect(404);
+
+        })
+    })
+
 });

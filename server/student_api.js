@@ -59,9 +59,15 @@ studentApi.delete('/:id', (req, res, next) => {
             id
         }
     })
-        .then((student) => res.json(student).status(202))
+        .then((student) => {
+        if (student) {
+            res.status(200).json(student);
+        } else {
+            res.status(404).json(student);
+        }
+    })
         .catch((err) => {
-            res.json(err).status(err.status(404))
+            res.status(500).json(err);
         })
 })
 
