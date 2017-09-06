@@ -11,8 +11,14 @@ studentApi.get('/', (req, res, next) => {
 studentApi.get('/:id', (req, res, next) => {
     const id = +req.params.id;
     Student.findById(id)
-        .then((student) => res.json(student).status(200))
-        .catch(console.err)
+        .then((student) => {
+            if (student) {
+                res.status(200).json(student);
+            } else {
+                res.sendStatus(404)
+            }
+        })
+        .catch((err) => res.status(404).json(err))
 });
 
 studentApi.post('/', (req, res, next) => {

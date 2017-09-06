@@ -104,9 +104,10 @@ describe('Campuses Route:', () => {
                     })
                 });
             }).then((studentPromises) => {
-                Promise.all(studentPromises);
+                return Promise.all(studentPromises);
             }).then((students) => {
                 createdStudents = students;
+                return createdStudents;
             })
         });
 
@@ -210,7 +211,6 @@ describe('Campuses Route:', () => {
                 .send({name: newCampusName})
                 .expect(200)
                 .expect((res) => {
-                    console.log(res.body);
                     expect(res.body.id).to.equal(theCampus.id)
                     expect(res.body).to.exist;
                     expect(res.body.name).to.equal(newCampusName);
