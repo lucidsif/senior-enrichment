@@ -6,6 +6,8 @@ const agent = request.agent(app);
 const db = require('../db');
 const {Campus, Student} = require('../db/models');
 
+require('./campuses_model.spec');
+
 describe('Campuses Route:', () => {
 
     before(() => {

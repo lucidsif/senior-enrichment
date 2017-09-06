@@ -1,3 +1,5 @@
+require('./students_route.spec');
+
 import React from 'react';
 import {expect} from 'chai';
 import {shallow, mount} from 'enzyme';

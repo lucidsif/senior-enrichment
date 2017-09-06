@@ -4,7 +4,7 @@
   "description": "A review time project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests/*.spec.js --watch --compilers js:babel-register --database space_campus_test",
+    "test": "mocha ./tests/redux.spec.js --watch --compilers js:babel-register --database space_campus_test",
     "build": "webpack",
     "build-watch": "webpack -w",
     "start": "nodemon server/start.js --database space_campus"

@@ -1,3 +1,5 @@
+require('./react.spec');
+
 import {expect} from 'chai';
 import {createStore} from 'redux';
 import rootReducer from '../app/reducers';

@@ -2,6 +2,8 @@ const expect = require('chai').expect;
 const db = require('../db');
 const {Campus, Student} = require('../db/models');
 
+require('./campuses_route.spec');
+
 describe('The Student model', () => {
     before(() => {
         return db.sync({force: true})

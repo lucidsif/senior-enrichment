@@ -5,6 +5,8 @@ const agent = request.agent(app);
 const db = require('../db');
 const {Campus, Student} = require('../db/models');
 
+require('./students_model.spec');
+
 describe('Students Route', () => {
     before(() => {
         return db.sync({force: true})
