@@ -10,7 +10,7 @@ describe('Students Route', () => {
         return db.sync({force: true})
     });
 
-    var campus1;
+    var theCampus;
     var studentName = 'John Doe';
     var studentEmail = 'johndoe@email.com';
 
@@ -19,8 +19,8 @@ describe('Students Route', () => {
             name: 'Hunter College',
             image: 'http://www.hunter.cuny.edu/artsci/pressroom/slideshow-home/hunter-college-exterior/image'
         }).then((campus) => {
-            campus1 = campus;
-            return campus1;
+            theCampus = campus;
+            return theCampus;
         })
     });
 
@@ -91,15 +91,15 @@ describe('Students Route', () => {
             var creatingStudents = [{
                 name: 'Bo Jan',
                 email: 'bo@email.com',
-                campusId: campus1.id
+                campusId: theCampus.id
             }, {
                 name: 'Ted Bundy',
                 email: 'ted@email.com',
-                campusId: campus1.id
+                campusId: theCampus.id
             }, {
                 name: 'Lee Roy',
                 email: 'lee@email.com',
-                campusId: campus1.id
+                campusId: theCampus.id
             }]
                 .map(data => Student.create(data));
 
@@ -114,7 +114,7 @@ describe('Students Route', () => {
                 .expect((res) => {
                     expect(res.body).to.be.an.instanceOf(Object);
                     expect(res.body.id).to.equal(chosenStudent.id);
-                    expect(res.body.campusId).to.be.equal(campus1.id);
+                    expect(res.body.campusId).to.be.equal(theCampus.id);
                 })
         });
 
@@ -123,6 +123,67 @@ describe('Students Route', () => {
                 .get(`/api/students/9999`)
                 .expect(404);
         })
+    });
 
+    describe('POST /students', () => {
+        it('creates a new student', () => {
+            return agent
+                .post('/api/students')
+                .send({name: studentName, email: studentEmail})
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body.id).to.not.be.an('undefined');
+                    expect(res.body.name).to.equal(studentName);
+                    expect(res.body.email).to.equal(studentEmail);
+                })
+        });
+
+        it('saves student to the DB', () => {
+            var postedStudent;
+            return agent
+                .post('/api/students')
+                .send({name: studentName, email: studentEmail})
+                .expect((res) => postedStudent = res.body)
+                .expect(200)
+                .then(() => Student.findById(postedStudent.id))
+                .then((foundStudent) => {
+                    expect(foundStudent.id).to.equal(postedStudent.id);
+                    expect(foundStudent.name).to.equal(studentName);
+                    expect(foundStudent.email).to.equal(studentEmail);
+                })
+        });
+
+        it('returns JSON of the actual created student, not just the POSTd data', () => {
+            return agent
+                .post('/api/students')
+                .send({
+                    name: studentName,
+                    email: studentEmail,
+                    extraneous: 'Sequelize will quietly ignore this non-schema property'
+                })
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body.extraneous).to.be.an('undefined');
+                    expect(res.body.createdAt).to.exist;
+                })
+        });
+
+        it('does not create a new student without email', () => {
+            return agent
+                .post('/api/students')
+                .send({
+                    name: 'This student should not be allowed'
+                })
+                .expect(500)
+
+        });
+
+        it('does not create a new student if given an invalid campusId', () => {
+            return agent
+                .post('/api/students')
+                .send({name: studentName, email: studentEmail, campusId: 999})
+                .expect(500);
+        })
     })
+
 });

@@ -28,7 +28,7 @@ studentApi.post('/', (req, res, next) => {
         })
         .then((foundStudent) => res.json(foundStudent).status(201))
         .catch((err) => {
-            res.json(err).status(400)
+            res.status(500).json(err);
         })
 });
 
