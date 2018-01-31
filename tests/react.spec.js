@@ -18,11 +18,11 @@ describe('React components', () => {
 
         let home;
         beforeEach('Create component', () => {
-            home = shallow(<Home/>);
+            home = shallow(<Home />);
         });
 
         it('should be a <Grid>', () => {
-            expect(home.is(<Grid />))
+            expect(home.is(<Grid />));
         });
 
         // it('should have a <CampusThumbnail />', () => {
@@ -34,7 +34,7 @@ describe('React components', () => {
         let props;
         beforeEach('Create component', () => {
             props = {
-                match : {
+                match: {
                     params: {
                         id: 1
                     }

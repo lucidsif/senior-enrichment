@@ -49,7 +49,6 @@ describe('The `Campus` model', function () {
         });
 
         it('requires `name`', function () {
-
             campus.name = null;
             return campus.validate()
                 .then(function () {
@@ -57,7 +56,7 @@ describe('The `Campus` model', function () {
                 })
                 .catch(err => {
                     expect(err).to.be.an.instanceOf(Error);
-                })
+                });
         });
         it('requires `image`', function () {
 
@@ -68,9 +67,8 @@ describe('The `Campus` model', function () {
                 })
                 .catch(err => {
                     expect(err).to.be.an.instanceOf(Error);
-                })
+                });
         });
-    })
+    });
 });
-
 

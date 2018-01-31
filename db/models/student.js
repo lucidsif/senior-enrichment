@@ -1,5 +1,5 @@
 'use strict';
-var Sequelize = require('sequelize')
+var Sequelize = require('sequelize');
 var db = require('../index.js');
 
 // TODO: add validations

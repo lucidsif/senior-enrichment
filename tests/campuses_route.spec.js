@@ -11,13 +11,13 @@ require('./campuses_model.spec');
 describe('Campuses Route:', () => {
 
     before(() => {
-        return db.sync({force: true})
+        return db.sync({force: true});
     });
 
     afterEach(() => {
         return Promise.all([
             Campus.truncate({cascade: true})
-        ])
+        ]);
     });
 
     describe('GET /campuses', () => {
@@ -30,7 +30,7 @@ describe('Campuses Route:', () => {
                 .expect((res) => {
                     expect(res.body).to.be.an.instanceOf(Array);
                     expect(res.body).to.have.length(0);
-                })
+                });
         });
     });
 
@@ -49,8 +49,8 @@ describe('Campuses Route:', () => {
                 .expect((res) => {
                     expect(res.body).to.be.an.instanceOf(Array);
                     expect(res.body[0].name).to.equal(campusName);
-                })
-        })
+                });
+        });
     });
 
     it('returns multiple campuses in the DB', () => {
@@ -77,9 +77,9 @@ describe('Campuses Route:', () => {
                     expect(res.body.length).to.equal(2);
                     expect(res.body[0].name).to.equal(campus1.name);
                     expect(res.body[1].name).to.equal(campus2.name);
-                })
-        })
-    })
+                });
+        });
+    });
 
     describe('GET /campuses/:id', () => {
 
@@ -103,14 +103,14 @@ describe('Campuses Route:', () => {
                         name: student.name,
                         email: student.name,
                         campusId: campus.id
-                    })
+                    });
                 });
             }).then((studentPromises) => {
                 return Promise.all(studentPromises);
             }).then((students) => {
                 createdStudents = students;
                 return createdStudents;
-            })
+            });
         });
 
         it('returns the JSON of the campuses based on the id', () => {
@@ -121,14 +121,14 @@ describe('Campuses Route:', () => {
                     expect(res.body.students).to.exist;
                     expect(res.body.students).to.be.an.instanceOf(Array);
                     expect(res.body.students.length).to.equal(3);
-                })
+                });
         });
 
         it('returns a 404 error if accessing a non existant campus', () => {
             return agent
                 .get('/api/campuses/999')
                 .expect(404);
-        })
+        });
     });
 
     describe('POST /campuses', () => {
@@ -150,7 +150,7 @@ describe('Campuses Route:', () => {
                     expect(res.body.id).to.not.be.an('undefined');
                     expect(res.body).to.be.an.instanceOf(Object);
                     expect(res.body.name).to.equal(campusName);
-                })
+                });
         });
 
         it('saves the campus to the DB', () => {
@@ -159,13 +159,13 @@ describe('Campuses Route:', () => {
                 .send(campus)
                 .expect(201)
                 .expect((res) => {
-                    postedCampus = res.body
+                    postedCampus = res.body;
                 })
                 .then(() => Campus.findById(postedCampus.id))
                 .then((foundCampus) => {
                     expect(foundCampus.id).to.equal(postedCampus.id);
                     expect(foundCampus.name).to.equal(postedCampus.name);
-                })
+                });
         });
 
         it('sends back JSON of the actual created campus, not just the POSTed data', () => {
@@ -179,8 +179,8 @@ describe('Campuses Route:', () => {
                 .expect((res) => {
                     expect(res.body.extraneous).to.be.an('undefined');
                     expect(res.body.createdAt).to.exist;
-                })
-        })
+                });
+        });
 
         it('does not create a new campus without an imageUrl', () => {
             return agent.post('/api/campuses')
@@ -188,7 +188,7 @@ describe('Campuses Route:', () => {
                     name: campusName,
                 })
                 .expect(500);
-        })
+        });
 
 
     });
@@ -205,7 +205,7 @@ describe('Campuses Route:', () => {
                 image: campusImage
             }).then((campus) => {
                 theCampus = campus;
-            })
+            });
         });
 
         it('updates a campus', () => {
@@ -213,10 +213,10 @@ describe('Campuses Route:', () => {
                 .send({name: newCampusName})
                 .expect(200)
                 .expect((res) => {
-                    expect(res.body.id).to.equal(theCampus.id)
+                    expect(res.body.id).to.equal(theCampus.id);
                     expect(res.body).to.exist;
                     expect(res.body.name).to.equal(newCampusName);
-                })
+                });
         });
 
         it('saves the updated campus to the DB', () => {
@@ -227,14 +227,14 @@ describe('Campuses Route:', () => {
                 .then((foundCampus) => {
                     expect(foundCampus.id).to.equal(theCampus.id);
                     expect(foundCampus.name).to.equal(newCampusName);
-                })
+                });
         });
 
         it('gets 500 error for invalid update', () => {
             return agent.put(`/api/campuses/${theCampus.id}`)
                 .send({name: ''})
-                .expect(500)
-        })
+                .expect(500);
+        });
 
     });
 
@@ -251,7 +251,7 @@ describe('Campuses Route:', () => {
             return campus.save().then((campus) => {
                 createdCampus = campus;
                 return createdCampus;
-            })
+            });
         });
 
         it('should delete the campus with the right id', () => {
@@ -261,16 +261,16 @@ describe('Campuses Route:', () => {
                 .then(() => Campus.findAll())
                 .then((foundCampuses) => {
                     expect(foundCampuses.length).to.equal(0);
-                    expect(foundCampuses.filter((campus => campus.id === createdCampus.id)).length).to.equal(0)
-                })
+                    expect(foundCampuses.filter((campus => campus.id === createdCampus.id)).length).to.equal(0);
+                });
         });
 
         it('should return a 404 error if the id is not correct', () => {
             return agent
                 .delete(`/api/campuses/95892`)
-                .expect(404)
-        })
+                .expect(404);
+        });
 
-    })
+    });
 
 });

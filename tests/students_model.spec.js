@@ -6,7 +6,7 @@ require('./campuses_route.spec');
 
 describe('The Student model', () => {
     before(() => {
-        return db.sync({force: true})
+        return db.sync({force: true});
     });
 
     var campusName = 'Hunter';
@@ -32,14 +32,14 @@ describe('The Student model', () => {
                 });
                 done();
             })
-            .catch(console.error)
+            .catch(console.error);
 
     });
 
     afterEach(() => {
         return Promise.all([
             Campus.truncate({cascade: true})
-        ])
+        ]);
     });
 
     describe('attributes definition', () => {
@@ -49,7 +49,7 @@ describe('The Student model', () => {
                     expect(student.name).to.equal(studentName);
                     expect(student.email).to.equal(studentEmail);
                     expect(student.campusId).to.equal(campusId);
-                })
+                });
         });
 
         it('requires name', () => {
@@ -60,7 +60,7 @@ describe('The Student model', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.an.instanceOf(Error);
-                })
+                });
         });
 
         it('requires email', () => {
@@ -71,8 +71,8 @@ describe('The Student model', () => {
                 })
                 .catch((err) => {
                     expect(err).to.be.an.instanceOf(Error);
-                })
-        })
+                });
+        });
     });
 
     describe('associations', () => {
@@ -80,7 +80,7 @@ describe('The Student model', () => {
         Add a `belongsTo` relationship between students and campus, but
         make sure the campus is aliased as campusId for each student
          */
-        it("student belongs to a campus", () => {
+        it('student belongs to a campus', () => {
             return student.save()
                 .then((student) => {
                 return Student.find({
@@ -93,7 +93,7 @@ describe('The Student model', () => {
                 .then((foundStudent) => {
                 expect(foundStudent.campus).to.exist;
                 expect(foundStudent.campus.id).to.equal(campusId);
-                })
-        })
-    })
+                });
+        });
+    });
 });

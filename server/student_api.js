@@ -5,7 +5,7 @@ const Student = require('../db').models.student;
 studentApi.get('/', (req, res, next) => {
     Student.findAll({include: [{all: true}]})
         .then((students) => res.json(students).status(200))
-        .catch(console.err)
+        .catch(console.err);
 });
 
 studentApi.get('/:id', (req, res, next) => {
@@ -15,10 +15,10 @@ studentApi.get('/:id', (req, res, next) => {
             if (student) {
                 res.status(200).json(student);
             } else {
-                res.sendStatus(404)
+                res.sendStatus(404);
             }
         })
-        .catch((err) => res.status(404).json(err))
+        .catch((err) => res.status(404).json(err));
 });
 
 studentApi.post('/', (req, res, next) => {
@@ -29,7 +29,7 @@ studentApi.post('/', (req, res, next) => {
         .then((foundStudent) => res.json(foundStudent).status(201))
         .catch((err) => {
             res.status(500).json(err);
-        })
+        });
 });
 
 studentApi.put('/:id', (req, res, next) => {
@@ -43,13 +43,13 @@ studentApi.put('/:id', (req, res, next) => {
             if (student) {
                 return Student.findById(id);
             } else {
-                res.sendStatus(404)
+                res.sendStatus(404);
             }
         })
         .then((foundStudent) => res.status(200).json(foundStudent))
         .catch((err) => {
             res.status(500).json(err);
-        })
+        });
 });
 
 studentApi.delete('/:id', (req, res, next) => {
@@ -68,8 +68,8 @@ studentApi.delete('/:id', (req, res, next) => {
     })
         .catch((err) => {
             res.status(500).json(err);
-        })
-})
+        });
+});
 
 
 module.exports = studentApi;

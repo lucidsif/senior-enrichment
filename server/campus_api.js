@@ -5,7 +5,7 @@ const Campus = require('../db').models.campus;
 campusApi.get('/', (req, res, next) => {
     Campus.findAll({include: [{all: true}]})
         .then((campuses) => res.json(campuses).status(200))
-        .catch(console.err)
+        .catch(console.err);
 });
 
 campusApi.get('/:id', (req, res, next) => {
@@ -20,13 +20,13 @@ campusApi.get('/:id', (req, res, next) => {
             if (!campus) {
                 res.sendStatus(404);
             } else {
-                res.json(campus).status(200)
+                res.json(campus).status(200);
 
             }
         })
         .catch((err) => {
             res.status(500).json(err);
-        })
+        });
 });
 
 campusApi.post('/', (req, res, next) => {
@@ -34,7 +34,7 @@ campusApi.post('/', (req, res, next) => {
         .then((campus) => res.status(201).json(campus))
         .catch((err) => {
             res.status(500).json(err);
-        })
+        });
 });
 
 campusApi.put('/:id', (req, res, next) => {
@@ -48,11 +48,11 @@ campusApi.put('/:id', (req, res, next) => {
             return Campus.findById(id);
         })
         .then((foundCampus) => {
-            res.status(200).json(foundCampus)
+            res.status(200).json(foundCampus);
         })
         .catch((err) => {
-            res.status(500).json(err)
-        })
+            res.status(500).json(err);
+        });
 });
 
 campusApi.delete('/:id', (req, res, next) => {
@@ -66,12 +66,12 @@ campusApi.delete('/:id', (req, res, next) => {
             if (!campus) {
                 res.sendStatus(404);
             } else {
-                res.sendStatus(202)
+                res.sendStatus(202);
             }
         })
         .catch((err) => {
             res.status.json(err);
-        })
-})
+        });
+});
 
 module.exports = campusApi;

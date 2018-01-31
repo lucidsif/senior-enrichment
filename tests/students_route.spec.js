@@ -25,7 +25,7 @@ describe('Students Route', () => {
             return theCampus;
         })
     });
-
+C
 
     afterEach(() => {
         return Promise.all([
@@ -131,12 +131,13 @@ describe('Students Route', () => {
         it('creates a new student', () => {
             return agent
                 .post('/api/students')
-                .send({name: studentName, email: studentEmail})
+                .send({name: studentName, email: studentEmail, campusId: theCampus.id})
                 .expect(200)
                 .expect((res) => {
                     expect(res.body.id).to.not.be.an('undefined');
                     expect(res.body.name).to.equal(studentName);
                     expect(res.body.email).to.equal(studentEmail);
+                    expect(res.body.campus.id).to.equal(theCampus.id)
                 })
         });
 

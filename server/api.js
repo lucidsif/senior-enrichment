@@ -9,6 +9,7 @@ const campusApi = require('./campus_api');
 api.use('/students', studentApi);
 api.use('/campuses', campusApi);
 api.get('/hello', (req, res) => res.send({hello: 'world'}));
+console.log('sadf');
 
 
 module.exports = api;

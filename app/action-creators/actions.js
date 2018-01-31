@@ -7,21 +7,21 @@ export const getCampuses = (campuses) => {
     return {
         type: GET_CAMPUSES,
         campuses
-    }
+    };
 };
 
 export const getStudents = (students) => {
     return {
         type: GET_STUDENTS,
         students
-    }
+    };
 };
 
 export const fetchCampuses = () => (dispatch) => {
     axios.get('/api/campuses').then(res => res.data).then((campuses) => {
         dispatch(getCampuses(campuses));
     })
-        .catch(console.error)
+        .catch(console.error);
 };
 
 export const postCampus = (campusObj) => (dispatch) => {
@@ -47,7 +47,7 @@ export const putCampus = (campusId, campusObj) => (dispatch) => {
 };
 
 // on delete, cascade - test backend
-export const deleteCampus= (campusId) => (dispatch) => {
+export const deleteCampus = (campusId) => (dispatch) => {
     axios.delete(`/api/campuses/${campusId}`)
         .then((response) => response.data)
         .then(() => {
@@ -56,7 +56,7 @@ export const deleteCampus= (campusId) => (dispatch) => {
             dispatch(fetchCampuses());
 
         })
-        .catch(console.error)
+        .catch(console.error);
 };
 
 export const fetchStudents = () => (dispatch) => {
@@ -80,7 +80,6 @@ export const postStudent = (studentObj) => (dispatch) => {
 };
 
 
-
 // export function postStudent(studentObj) {
 //     return function thunk(dispatch) {
 //         axios.post('/api/students', studentObj)
@@ -93,10 +92,6 @@ export const postStudent = (studentObj) => (dispatch) => {
 //             .catch(console.error);
 //     }
 // }
-
-
-
-
 
 
 export const putStudent = (studentId, studentObj) => (dispatch) => {
@@ -119,7 +114,6 @@ export const deleteStudent = (studentId) => (dispatch) => {
             dispatch(fetchCampuses());
 
         })
-        .catch(console.error)
+        .catch(console.error);
 };
-
 
